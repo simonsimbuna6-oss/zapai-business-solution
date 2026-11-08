@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zapai Business Solution - Quality used cars from Japan, beauty products and retail shopping in Lae, Papua New Guinea.">
+  <title>Zapai Business Solution | Lae PNG</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="#home">ZAPAI<span>.</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <nav id="mainNav">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#cars">Cars</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="container hero-content">
+    <p class="eyebrow">WELCOME TO ZAPAI BUSINESS SOLUTION</p>
+    <h1>Quality Products.<br><span>Less Cost.</span></h1>
+    <p>Your trusted shopping connection in Lae, Morobe Province, Papua New Guinea.</p>
+    <div class="hero-buttons">
+      <a class="btn btn-primary" href="#cars">Explore Our Cars</a>
+      <a class="btn btn-outline" href="#contact">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="container">
+    <p class="eyebrow">WHAT WE OFFER</p>
+    <h2>Our Business Services</h2>
+    <div class="service-grid">
+      <article class="service-card">
+        <div class="service-icon">🚘</div>
+        <h3>Used Cars from Japan</h3>
+        <p>Explore quality Japanese used vehicles. Contact us for availability, specifications and pricing.</p>
+      </article>
+      <article class="service-card">
+        <div class="service-icon">💄</div>
+        <h3>Beauty & Personal Care</h3>
+        <p>Beauty, cosmetic and personal care shopping solutions.</p>
+      </article>
+      <article class="service-card">
+        <div class="service-icon">🛍️</div>
+        <h3>Shopping & Retail</h3>
+        <p>Quality products and shopping assistance at competitive costs.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section cars-section" id="cars">
+  <div class="container">
+    <p class="eyebrow">JAPANESE VEHICLES</p>
+    <h2>Explore Our Car Categories</h2>
+    <p class="section-intro">Looking for a quality used car? Contact us to enquire about current availability.</p>
+    <div class="car-grid">
+      <article class="car-card">
+        <div class="car-image">🚗</div>
+        <div class="car-info">
+          <h3>Toyota Mark X</h3>
+          <p>Comfort, style and performance.</p>
+          <a href="#contact">Enquire Now →</a>
+        </div>
+      </article>
+      <article class="car-card">
+        <div class="car-image">🚙</div>
+        <div class="car-info">
+          <h3>Toyota Sedan</h3>
+          <p>Practical options for everyday driving.</p>
+          <a href="#contact">Enquire Now →</a>
+        </div>
+      </article>
+      <article class="car-card">
+        <div class="car-image">🚘</div>
+        <div class="car-info">
+          <h3>Nissan Bluebird Sylphy</h3>
+          <p>A stylish and comfortable sedan option.</p>
+          <a href="#contact">Enquire Now →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section about-section" id="about">
+  <div class="container">
+    <p class="eyebrow">ABOUT OUR BUSINESS</p>
+    <h2>Welcome to Zapai Business Solution</h2>
+    <p>We connect customers with quality products and shopping opportunities. Based in Lae, Morobe Province, PNG, we aim to provide reliable service, value and customer support.</p>
+    <p><strong>Our slogan:</strong> We provide quality products and less cost.</p>
+  </div>
+</section>
+
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <p class="eyebrow">GET IN TOUCH</p>
+    <h2>Contact Our Team</h2>
+    <p>Send us your enquiry and tell us what you're looking for.</p>
+
+    <div class="contact-details">
+      <p><strong>Location:</strong> Lae, Morobe Province, Papua New Guinea</p>
+      <p><strong>Phone:</strong> +675 7667 3887</p>
+      <p><strong>Phone:</strong> +675 7469 7351</p>
+      <p><strong>Email:</strong> zapaiinvestment@outlook.com</p>
+    </div>
+
+    <form id="enquiryForm">
+      <label for="name">Your name</label>
+      <input id="name" name="name" type="text" required>
+
+      <label for="phone">Phone number</label>
+      <input id="phone" name="phone" type="tel" required>
+
+      <label for="car_interest">What are you interested in?</label>
+      <select id="car_interest" name="car_interest">
+        <option value="Used Cars">Used Cars from Japan</option>
+        <option value="Toyota Mark X">Toyota Mark X</option>
+        <option value="Toyota Sedan">Toyota Sedan</option>
+        <option value="Nissan Bluebird Sylphy">Nissan Bluebird Sylphy</option>
+        <option value="Beauty Products">Beauty & Personal Care</option>
+        <option value="Shopping & Retail">Shopping & Retail</option>
+        <option value="Other">Other enquiry</option>
+      </select>
+
+      <label for="message">Your message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <input type="text" name="website" id="website" class="hidden-field" tabindex="-1" autocomplete="off">
+
+      <button class="btn btn-primary" type="submit">Send Enquiry</button>
+      <p id="formMessage" role="status"></p>
+    </form>
+
+    <a class="btn btn-whatsapp" href="https://wa.me/67576673887">Chat with us on WhatsApp</a>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <a class="brand footer-brand" href="#home">ZAPAI<span>.</span></a>
+    <p>Zapai Business Solution | Lizzy Online Quality Used Car Shopping</p>
+    <p>Lae, Morobe Province, Papua New Guinea</p>
+    <p>We provide quality products and less cost.</p>
+    <small>© <span id="year">2026</span> Zapai Business Solution. All rights reserved.</small>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
