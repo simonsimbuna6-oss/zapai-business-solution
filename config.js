@@ -1,5 +1,5 @@
 
 window.ZAPAI_CONFIG = {
-  SUPABASE_URL: "YOUR_SUPABASE_PROJECT_URL",
-  SUPABASE_KEY: "YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY"
+  SUPABASE_URL: "https://pexbgqyqamnbzjzgqxvb.supabase.co",
+  SUPABASE_KEY: "sb_publishable_G_9TK4ueHJBBORUI8f5LTg_IX2tltY6"
 };
