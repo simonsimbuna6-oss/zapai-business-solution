@@ -1,0 +1,355 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #172033;
+  background: #ffffff;
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1150px;
+  margin: auto;
+}
+
+.site-header {
+  background: #071a36;
+  color: white;
+  padding: 18px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-size: 27px;
+  font-weight: 800;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+.brand span {
+  color: #18b66b;
+}
+
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #18b66b;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.hero {
+  background: linear-gradient(120deg, #071a36, #123e68);
+  color: white;
+  padding: 110px 0;
+}
+
+.hero-content {
+  max-width: 1150px;
+}
+
+.eyebrow {
+  color: #18b66b;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 7vw, 72px);
+  line-height: 1.1;
+  margin-bottom: 22px;
+}
+
+.hero h1 span {
+  color: #24d487;
+}
+
+.hero-content > p:not(.eyebrow) {
+  font-size: 19px;
+  max-width: 600px;
+  color: #e0e9f3;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 7px;
+  padding: 13px 23px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #18b66b;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #119557;
+}
+
+.btn-outline {
+  border: 1px solid white;
+  color: white;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section h2 {
+  font-size: 34px;
+  color: #071a36;
+  margin-bottom: 18px;
+}
+
+.service-grid,
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 35px;
+}
+
+.service-card,
+.car-card {
+  background: white;
+  border: 1px solid #e3e9ef;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
+
+.service-card {
+  padding: 28px;
+}
+
+.service-icon {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+.service-card h3,
+.car-info h3 {
+  color: #071a36;
+  margin-bottom: 10px;
+  font-size: 21px;
+}
+
+.service-card p,
+.car-info p {
+  color: #64748b;
+}
+
+.cars-section {
+  background: #f3f7fb;
+}
+
+.section-intro {
+  color: #64748b;
+}
+
+.car-image {
+  min-height: 180px;
+  background: linear-gradient(135deg, #dce9f5, #edf3f8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 75px;
+}
+
+.car-info {
+  padding: 23px;
+}
+
+.car-info a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #119557;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.about-section {
+  background: white;
+}
+
+.about-section p {
+  max-width: 800px;
+  margin-bottom: 15px;
+  color: #536174;
+}
+
+.contact-section {
+  background: #f3f7fb;
+}
+
+.contact-details {
+  background: white;
+  border-radius: 10px;
+  padding: 22px;
+  margin: 25px 0;
+  max-width: 650px;
+}
+
+.contact-details p {
+  margin-bottom: 8px;
+}
+
+form {
+  max-width: 650px;
+  background: white;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+form label {
+  display: block;
+  font-weight: bold;
+  margin: 15px 0 7px;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccd5df;
+  border-radius: 6px;
+  font: inherit;
+  background: white;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+form button {
+  margin-top: 20px;
+}
+
+.hidden-field {
+  display: none !important;
+}
+
+#formMessage {
+  margin-top: 12px;
+}
+
+.btn-whatsapp {
+  margin-top: 22px;
+  background: #18b66b;
+  color: white;
+}
+
+.site-footer {
+  background: #071a36;
+  color: #d5dfeb;
+  text-align: center;
+  padding: 45px 0;
+}
+
+.footer-brand {
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.site-footer p {
+  margin: 6px 0;
+}
+
+.site-footer small {
+  display: block;
+  margin-top: 20px;
+  color: #9cacc0;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: #071a36;
+    flex-direction: column;
+    padding: 20px 5%;
+    gap: 18px;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  .hero {
+    padding: 75px 0;
+  }
+
+  .service-grid,
+  .car-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  .section h2 {
+    font-size: 28px;
+  }
+
+  form {
+    padding: 20px;
+  }
+}
