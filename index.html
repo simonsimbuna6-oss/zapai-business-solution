@@ -14,6 +14,10 @@ header b{font-size:26px;letter-spacing:.5px} header b span{color:#00c389}
 header small{display:block;font-size:10px;letter-spacing:1.5px;color:#a8b2c5;font-weight:700}
 .btn{display:inline-block;background:#00b894;color:#fff;padding:12px 20px;border-radius:999px;font-weight:800;font-size:14px;text-align:center}
 .btn.white{background:#fff;color:#0f2040}.btn.wa{background:#25D366}.btn.dark{background:#0f2040}
+#menuToggle{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;padding:8px 12px;border-radius:8px;font-weight:800;cursor:pointer;font-size:18px;display:none}
+nav#mainNav{display:flex;gap:14px;align-items:center}
+nav#mainNav a{color:#fff;font-weight:700;font-size:13px}
+@media(max-width:760px){#menuToggle{display:block}nav#mainNav{display:none;position:absolute;top:100%;left:0;right:0;background:#0f2040;flex-direction:column;padding:14px}nav#mainNav.active{display:flex}}
 .topbar{background:#fff;border-bottom:1px solid #e5e8ef;text-align:center;padding:8px;font-size:13px;font-weight:600}
 .topbar a{color:#1877F2}
 .hero{background:#0f2040;color:#fff;padding:36px 16px 32px;text-align:center}
@@ -56,12 +60,16 @@ header small{display:block;font-size:10px;letter-spacing:1.5px;color:#a8b2c5;fon
 .contact-info{background:#f6f7f9;border-radius:12px;padding:14px;margin:14px 0;line-height:1.9;font-size:14px}
 footer{background:#0f2040;color:#b8c0d1;text-align:center;padding:24px 16px;font-size:13px;line-height:1.7}
 footer b{color:#fff;font-size:16px}
-#formMessage{margin-top:10px;font-weight:700;font-size:14px;color:#0f2040;text-align:center}
+#formMessage{margin-top:12px;font-weight:700;font-size:14px;color:#0f2040;text-align:center;min-height:20px}
+.honeypot{position:absolute;left:-9999px;opacity:0;height:0;width:0}
 </style>
 </head>
 <body>
-<header><div><b>ZAPAI<span>.</span></b><small>LAE • MOROBE • PNG</small></div><a class="btn wa" href="https://wa.me/67576673887?text=Hello%20ZAPAI%2C%20I%20want%20to%20order" target="_blank">WhatsApp</a></header>
-<div class="topbar">Follow us on Facebook for latest cars - <a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank">Click Here</a></div>
+<header><div><b>ZAPAI<span>.</span></b><small>LAE • MOROBE • PNG</small></div>
+<nav id="mainNav"><a href="#products">Shop</a><a href="#quote">Quotation</a><a href="#business-services">Business</a><a href="#contact">Contact</a></nav>
+<div style="display:flex;gap:8px;align-items:center"><a class="btn wa" href="https://wa.me/67576673887?text=Hello%20ZAPAI%2C%20I%20want%20to%20order" target="_blank" rel="noopener noreferrer">WhatsApp</a><button id="menuToggle" aria-label="Menu">☰</button></div>
+</header>
+<div class="topbar">Follow us on Facebook for latest cars - <a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" rel="noopener noreferrer">Click Here</a></div>
 <div class="hero">
 <h1>Quality Products.<br><span>Less Cost.</span></h1>
 <p>Logistics • Laundry • Welding • Bricks • Construction • Beauty • Business Services<br>Lae, Morobe Province, Papua New Guinea</p>
@@ -70,7 +78,7 @@ footer b{color:#fff;font-size:16px}
 <div class="trust"><span>Lae Based</span><span>Fast Response on WhatsApp</span><span>Pay on Pickup / Delivery</span></div>
 </div>
 <div class="wrap" id="products">
-<div class="car-box"><b>Looking for Cars? Mark X, Land Cruiser & More</b><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" class="btn" style="background:#1877F2;padding:10px 16px;white-space:nowrap">See Cars on Facebook</a></div>
+<div class="car-box"><b>Looking for Cars? Mark X, Land Cruiser & More</b><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" rel="noopener noreferrer" class="btn" style="background:#1877F2;padding:10px 16px;white-space:nowrap">See Cars on Facebook</a></div>
 <h2 class="section-title">Select My Best Products - Only Available in PNG</h2>
 <p class="section-sub">Tap a category to filter. Tap Get Quotation to calculate, then Order on WhatsApp.</p>
 <div class="filters" id="filters">
@@ -110,14 +118,14 @@ footer b{color:#fff;font-size:16px}
 <h3 style="margin:8px 0 4px;font-size:20px">Business Registration</h3>
 <p style="color:#5a6478;font-size:14px">Register your company / IPA, TIN, Business Name. We do the paperwork for you.</p>
 <p style="font-weight:800;font-size:21px;margin:10px 0">From K500 <span style="font-weight:400;font-size:13px;color:#888">- 3-5 working days</span></p>
-<a href="https://wa.me/67574697351?text=Hi%20ZAPAI%2C%20I%20want%20Business%20Registration" target="_blank" class="btn wa" style="border-radius:10px">Order on WhatsApp</a>
+<a href="https://wa.me/67574697351?text=Hi%20ZAPAI%2C%20I%20want%20Business%20Registration" target="_blank" rel="noopener noreferrer" class="btn wa" style="border-radius:10px">Order on WhatsApp</a>
 <p style="font-size:12px;color:#888;margin-top:8px">IPA + TIN + Business Name checklist included</p>
 </div>
 <div class="biz-card navy">
 <h3 style="font-size:20px">Business Profiling / Company Profile</h3>
 <p style="color:#d6dcea;font-size:14px;margin-top:6px">Professional Company Profile PDF for contracts, loans, tenders & clients.</p>
 <p style="font-weight:800;font-size:21px;margin:10px 0">From K300 <span style="font-weight:400;font-size:13px;color:#b8c0d1">- 24hr delivery PDF</span></p>
-<a href="https://wa.me/67574697351?text=Hi%20ZAPAI%2C%20I%20want%20Business%20Profiling" target="_blank" class="btn wa" style="border-radius:10px">Order on WhatsApp</a>
+<a href="https://wa.me/67574697351?text=Hi%20ZAPAI%2C%20I%20want%20Business%20Profiling" target="_blank" rel="noopener noreferrer" class="btn wa" style="border-radius:10px">Order on WhatsApp</a>
 <p style="font-size:12px;color:#b8c0d1;margin-top:8px">Ready for bank, tender & client presentation</p>
 </div>
 </div>
@@ -135,21 +143,25 @@ footer b{color:#fff;font-size:16px}
 <b>Phone:</b> +675 7667 3887 / +675 7469 7351<br>
 <b>Email:</b> zapaiinvestment@outlook.com
 </div>
-<label style="font-weight:800;font-size:13px">Your name *</label><input type="text" id="fName" placeholder="Your name">
-<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">Phone number *</label><input type="text" id="fPhone" placeholder="+675 ...">
-<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">Interested in a Car?</label>
-<select id="fCar"><option value="">No - General Enquiry</option><option value="Mark X">Mark X</option><option value="Land Cruiser">Land Cruiser</option><option value="Hilux">Hilux</option><option value="Other Car">Other Car</option></select>
-<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">What do you need? *</label><textarea id="fMsg" rows="3" placeholder="e.g. I need 500 bricks to 8 Mile..."></textarea>
-<button onclick="sendEnquiry()" id="enquiryBtn" style="width:100%;padding:14px;background:#0f2040;color:#fff;border:0;border-radius:11px;font-weight:800;margin-top:14px;cursor:pointer">Send Enquiry</button>
-<div id="formMessage"></div>
+<form id="enquiryForm">
+<input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+<label style="font-weight:800;font-size:13px">Your name *</label><input type="text" id="fName" name="name" placeholder="Your name" required>
+<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">Phone number *</label><input type="text" id="fPhone" name="phone" placeholder="+675 ..." required>
+<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">Interested in a Car?</label><select id="carInterest" name="car_interest"><option value="">No - General Enquiry</option><option value="Mark X">Mark X</option><option value="Land Cruiser">Land Cruiser</option><option value="Hilux">Hilux</option><option value="Other Car">Other Car</option></select>
+<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">What do you need? *</label><textarea id="fMsg" name="message" rows="3" placeholder="e.g. I need 500 bricks to 8 Mile..." required></textarea>
+<button type="submit" style="width:100%;padding:14px;background:#0f2040;color:#fff;border:0;border-radius:11px;font-weight:800;margin-top:14px;cursor:pointer">Send Enquiry</button>
+<div id="formMessage" role="status" aria-live="polite"></div>
+</form>
 </div>
 </div>
-<footer><b>ZAPAI Investment</b><br>Lae, Morobe Province, Papua New Guinea<br>Quality Products. Less Cost.<br><br><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" style="color:#fff;background:#1877F2;padding:10px 18px;border-radius:999px;font-weight:800;display:inline-block">Follow For Latest Cars on Facebook</a><br><br><span>© 2026 ZAPAI Investment - WhatsApp 67576673887 / 67574697351</span></footer>
+<footer><b>ZAPAI Investment</b><br>Lae, Morobe Province, Papua New Guinea<br>Quality Products. Less Cost.<br><br><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" rel="noopener noreferrer" style="color:#fff;background:#1877F2;padding:10px 18px;border-radius:999px;font-weight:800;display:inline-block">Follow For Latest Cars on Facebook</a><br><br><span>© <span id="year">2026</span> ZAPAI Investment - WhatsApp 67576673887 / 67574697351</span></footer>
 <script>
-const ZAPAI_CONFIG = {
+window.ZAPAI_CONFIG = {
   SUPABASE_URL: "https://pexbgqyqamnbzjzgqxvb.supabase.co",
   SUPABASE_KEY: "sb_publishable_G_9TK4ueHJBBORUI8f5LTg_IX2tltY6"
 };
+</script>
+<script>
 const products=[
 {id:1,cat:"Bricks",name:"PNG Red Clay Bricks",desc:"Strong local red bricks. Perfect for houses, fences.",price:3.5,unit:"per brick",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600"},
 {id:2,cat:"Bricks",name:"Concrete Blocks 6 inch",desc:"Standard 6 inch block for foundation & walls.",price:5,unit:"per block",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600"},
@@ -175,10 +187,10 @@ function render(){
   const list = products.filter(p=>currentCat==='all'||p.cat===currentCat);
   list.forEach((p,i)=>{
     if(i==4){
-      grid.innerHTML+=`<div class="card" style="background:#1877F2;color:white;border:0;"><div class="pad" style="text-align:center;padding:22px 16px;"><h3 style="color:white;font-size:20px;">Need a Car?</h3><p style="color:#dbeafe;">Mark X, Land Cruiser, Hilux and More - Latest stock on Facebook</p><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" style="background:white;color:#1877F2;padding:12px 18px;border-radius:999px;font-weight:800;display:block;margin-top:12px;text-decoration:none;">See Cars on Facebook</a><p style="color:#bfdbfe;font-size:11px;margin-top:8px;">AD - ZAPAI</p></div></div>`;
+      grid.innerHTML+=`<div class="card" style="background:#1877F2;color:white;border:0;"><div class="pad" style="text-align:center;padding:22px 16px;"><h3 style="color:white;font-size:20px;">Need a Car?</h3><p style="color:#dbeafe;">Mark X, Land Cruiser, Hilux and More - Latest stock on Facebook</p><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" rel="noopener noreferrer" style="background:white;color:#1877F2;padding:12px 18px;border-radius:999px;font-weight:800;display:block;margin-top:12px;text-decoration:none;">See Cars on Facebook</a><p style="color:#bfdbfe;font-size:11px;margin-top:8px;">AD - ZAPAI</p></div></div>`;
     }
     if(i==10){
-      grid.innerHTML+=`<div class="card" style="background:#ff6b00;color:white;border:0;"><div class="pad" style="text-align:center;padding:22px 16px;"><h3 style="color:white;font-size:20px;">Start Your Business Today!</h3><p style="color:#ffedd5;">Registration From K500 - Profile From K300 - Done in 3-5 Days</p><a href="https://wa.me/67574697351?text=Hi ZAPAI, I want Business Registration" target="_blank" style="background:white;color:#ff6b00;padding:12px 18px;border-radius:999px;font-weight:800;display:block;margin-top:12px;text-decoration:none;">Claim Offer</a><p style="color:#ffedd5;font-size:11px;margin-top:8px;">AD - ZAPAI BUSINESS SERVICES</p></div></div>`;
+      grid.innerHTML+=`<div class="card" style="background:#ff6b00;color:white;border:0;"><div class="pad" style="text-align:center;padding:22px 16px;"><h3 style="color:white;font-size:20px;">Start Your Business Today!</h3><p style="color:#ffedd5;">Registration From K500 (3-5 Days) - Profile From K300 (24hr PDF)</p><a href="https://wa.me/67574697351?text=Hi ZAPAI, I want Business Registration" target="_blank" rel="noopener noreferrer" style="background:white;color:#ff6b00;padding:12px 18px;border-radius:999px;font-weight:800;display:block;margin-top:12px;text-decoration:none;">Claim Offer</a><p style="color:#ffedd5;font-size:11px;margin-top:8px;">AD - ZAPAI BUSINESS SERVICES</p></div></div>`;
     }
     grid.innerHTML+=`<div class="card"><img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async"><div class="pad"><span class="tag">${p.cat.toUpperCase()}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price">K${p.price} <small>${p.unit}</small></div><button class="quote" onclick="selectProduct(${p.id})">Get Quotation</button><button class="order" onclick="quickOrder(${p.id})">Order on WhatsApp</button></div></div>`;
   });
@@ -211,7 +223,7 @@ function calc(){
   return {p, q, del, total, locText};
 }
 function selectProduct(id){document.getElementById('pSelect').value=id;calc();document.getElementById('quote').scrollIntoView({behavior:'smooth'});}
-function quickOrder(id){ selectProduct(id); orderWA(); }
+function quickOrder(id){selectProduct(id);orderWA();}
 function orderWA(){
   const r = calc();
   if (!r) return;
@@ -219,50 +231,69 @@ function orderWA(){
   const msg = `Hello ZAPAI, I want to order:\n\nProduct: ${r.p.name}\nQuantity: ${r.q}\nUnit price: K${r.p.price}\nSubtotal: K${(r.p.price * r.q).toFixed(2)}\nDelivery: ${r.locText}\nDelivery charge: K${r.del.toFixed(2)}\nEstimated total: K${r.total.toFixed(2)}\n\nCustomer name / area: ${name}\n\nPlease confirm availability and final price.`;
   window.open(`https://wa.me/67576673887?text=${encodeURIComponent(msg)}`,'_blank','noopener,noreferrer');
 }
-async function sendEnquiry() {
-  const n = document.getElementById('fName').value.trim();
-  const ph = document.getElementById('fPhone').value.trim();
-  const car = document.getElementById('fCar').value || "";
-  const m = document.getElementById('fMsg').value.trim();
-  const msgEl = document.getElementById('formMessage');
-  const btn = document.getElementById('enquiryBtn');
-  if (!n || !ph || !m) {
-    msgEl.textContent = "Please complete name, phone and message.";
-    return;
-  }
-  const waMsg = `Hello ZAPAI Investment.\n\n` + `Name: ${n}\n` + `Phone: ${ph}\n` + `Car Interest: ${car || "None"}\n\n` + `Enquiry:\n${m}`;
-  const waUrl = `https://wa.me/67576673887?text=${encodeURIComponent(waMsg)}`;
-  const waWindow = window.open(waUrl, "_blank");
-  btn.disabled = true;
-  btn.textContent = "Sending...";
-  msgEl.textContent = "Submitting your enquiry...";
-  try {
-    const res = await fetch(ZAPAI_CONFIG.SUPABASE_URL + "/rest/v1/inquiries", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "apikey": ZAPAI_CONFIG.SUPABASE_KEY, "Authorization": "Bearer " + ZAPAI_CONFIG.SUPABASE_KEY, "Prefer": "return=minimal" },
-      body: JSON.stringify({ name: n, phone: ph, car_interest: car, message: m })
-    });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || "Database rejected the enquiry.");
-    }
-    msgEl.textContent = "Success! Your enquiry was saved. WhatsApp has been opened.";
-    document.getElementById('fName').value = "";
-    document.getElementById('fPhone').value = "";
-    document.getElementById('fCar').value = "";
-    document.getElementById('fMsg').value = "";
-  } catch (error) {
-    console.error("ZAPAI enquiry error:", error);
-    msgEl.textContent = "WhatsApp was opened, but the enquiry was NOT saved to our database. Please try again later or contact us on WhatsApp.";
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Send Enquiry";
-  }
-  if (!waWindow) {
-    msgEl.textContent += " If WhatsApp did not open, please allow pop-ups or contact us directly on +675 7667 3887.";
-  }
-}
 render(); fillSelect(); calc();
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.getElementById("menuToggle");
+  const mainNav = document.getElementById("mainNav");
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener("click", function () {
+      mainNav.classList.toggle("active");
+    });
+    mainNav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        mainNav.classList.remove("active");
+      });
+    });
+  }
+  const year = document.getElementById("year");
+  if (year) { year.textContent = new Date().getFullYear(); }
+  const form = document.getElementById("enquiryForm");
+  const formMessage = document.getElementById("formMessage");
+  if (form) {
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const data = new FormData(form);
+      if (data.get("website")) { return; }
+      const customer = {
+        name: (data.get("name") || "").trim(),
+        phone: (data.get("phone") || "").trim(),
+        car_interest: data.get("car_interest") || "",
+        message: (data.get("message") || "").trim()
+      };
+      if (!customer.name || !customer.phone || !customer.message) {
+        formMessage.textContent = "Please complete all required fields.";
+        return;
+      }
+      const config = window.ZAPAI_CONFIG;
+      const waMsg = `Hello ZAPAI Investment.\n\nName: ${customer.name}\nPhone: ${customer.phone}\nCar Interest: ${customer.car_interest || "None"}\n\nEnquiry:\n${customer.message}`;
+      const waUrl = `https://wa.me/67576673887?text=${encodeURIComponent(waMsg)}`;
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+      formMessage.textContent = "Opening WhatsApp... Saving enquiry...";
+      if (!config || !config.SUPABASE_URL || !config.SUPABASE_KEY) {
+        formMessage.textContent = "WhatsApp was opened, but database configuration is missing. Your enquiry was NOT saved.";
+        return;
+      }
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+      try {
+        const response = await fetch(config.SUPABASE_URL + "/rest/v1/inquiries", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "apikey": config.SUPABASE_KEY, "Prefer": "return=minimal" },
+          body: JSON.stringify(customer)
+        });
+        if (!response.ok) { throw new Error("Enquiry could not be sent."); }
+        formMessage.textContent = "Success! Your enquiry was saved. WhatsApp has been opened.";
+        form.reset();
+      } catch (error) {
+        formMessage.textContent = "WhatsApp was opened, but the enquiry was NOT saved in the database. Please try again.";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Send Enquiry";
+      }
+    });
+  }
+});
 </script>
 </body>
 </html>
