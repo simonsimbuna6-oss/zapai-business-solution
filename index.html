@@ -1,166 +1,162 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Zapai Business Solution - Quality used cars from Japan, beauty products and retail shopping in Lae, Papua New Guinea.">
-  <title>Zapai Business Solution | Lae PNG</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZAPAI. Quality Products. Less Cost. | Lae, PNG</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#f4f6f8;color:#0f2040}
+header{background:#0f2040;color:#fff;padding:14px 16px;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center}
+header b{font-size:28px;letter-spacing:1px} header b span{color:#00b894}
+.hero{background:linear-gradient(135deg,#0f2040,#00b894);color:#fff;padding:28px 16px;text-align:center}
+.hero h1{font-size:32px;line-height:1.1}.hero p{margin:12px 0;opacity:.9}
+.btn{display:inline-block;background:#00b894;color:#fff;padding:13px 20px;border-radius:999px;text-decoration:none;font-weight:bold;margin:4px}
+.btn.white{background:#fff;color:#0f2040}.btn.wa{background:#25D366}
+.wrap{padding:14px;max-width:1000px;margin:auto}
+.filters{display:flex;gap:8px;overflow:auto;padding:6px 0 14px}
+.filters button{white-space:nowrap;border:1px solid #ddd;background:#fff;padding:9px 14px;border-radius:999px;font-weight:bold;cursor:pointer}
+.filters button.active{background:#0f2040;color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.card img{width:100%;height:150px;object-fit:cover;background:#e8f8f3}
+.card .pad{padding:14px}
+.tag{font-size:11px;background:#e6fffa;color:#00a884;padding:4px 8px;border-radius:999px;font-weight:bold}
+.card h3{margin:8px 0 4px;font-size:17px}.card p{font-size:13px;color:#666;line-height:1.4}
+.price{font-size:20px;font-weight:bold;margin:8px 0}.price small{font-size:12px;color:#888}
+.card button{width:100%;padding:11px;border-radius:10px;border:0;font-weight:bold;cursor:pointer;margin-top:6px}
+.quote{background:#0f2040;color:#fff}.order{background:#25D366;color:#fff}
+.quoteBox{background:#fff;border-radius:18px;padding:18px;margin-top:18px}
+.quoteBox h2{margin-bottom:10px}.quoteBox label{font-weight:bold;font-size:13px;display:block;margin-top:12px}
+.quoteBox select,.quoteBox input,.contact input,.contact textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;margin-top:6px;font-size:15px}
+.total{background:#fff7d6;padding:14px;border-radius:12px;margin-top:14px;font-weight:bold;line-height:1.6}
+.contact{background:#fff;border-radius:18px;padding:18px;margin-top:18px}
+footer{text-align:center;padding:20px;color:#888;font-size:13px}
+</style>
 </head>
 <body>
+<header><b>ZAPAI<span>.</span></b><a class="btn wa" href="https://wa.me/67576673887?text=Hello%20ZAPAI%2C%20I%20want%20to%20order" target="_blank">WhatsApp</a></header>
 
-<header class="site-header">
-  <div class="container nav-wrap">
-    <a class="brand" href="#home">ZAPAI<span>.</span></a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
-    <nav id="mainNav">
-      <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#cars">Cars</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+<div class="hero">
+<h1>Quality Products.<br>Less Cost.</h1>
+<p>Logistics • Laundry • Welding • Bricks • Construction • Beauty • Resellers<br>Lae, Morobe Province, Papua New Guinea</p>
+<a class="btn white" href="#products">Shop Best PNG Products ↓</a>
+<a class="btn" href="#quote">Get Quotation →</a>
+</div>
 
-<main>
-<section class="hero" id="home">
-  <div class="container hero-content">
-    <p class="eyebrow">WELCOME TO ZAPAI BUSINESS SOLUTION</p>
-    <h1>Quality Products.<br><span>Less Cost.</span></h1>
-    <p>Your trusted shopping connection in Lae, Morobe Province, Papua New Guinea.</p>
-    <div class="hero-buttons">
-      <a class="btn btn-primary" href="#cars">Explore Our Cars</a>
-      <a class="btn btn-outline" href="#contact">Contact Us</a>
-    </div>
-  </div>
-</section>
+<div class="wrap" id="products">
+<h2>Select My Best Products - Only Available in PNG</h2>
+<p style="color:#666;font-size:14px;margin:6px 0 10px">Tap a category to filter. Tap Get Quotation to calculate, then Order on WhatsApp.</p>
+<div class="filters" id="filters">
+<button class="active" onclick="filterCat('all',this)">All</button>
+<button onclick="filterCat('Logistics',this)">Logistics</button>
+<button onclick="filterCat('Laundry',this)">Laundry</button>
+<button onclick="filterCat('Welding',this)">Welding</button>
+<button onclick="filterCat('Bricks',this)">Bricks</button>
+<button onclick="filterCat('Construction',this)">Construction</button>
+<button onclick="filterCat('Beauty',this)">Beauty</button>
+<button onclick="filterCat('Resellers',this)">Resellers</button>
+</div>
+<div class="grid" id="grid"></div>
 
-<section class="section" id="services">
-  <div class="container">
-    <p class="eyebrow">WHAT WE OFFER</p>
-    <h2>Our Business Services</h2>
-    <div class="service-grid">
-      <article class="service-card">
-        <div class="service-icon">🚘</div>
-        <h3>Used Cars from Japan</h3>
-        <p>Explore quality Japanese used vehicles. Contact us for availability, specifications and pricing.</p>
-      </article>
-      <article class="service-card">
-        <div class="service-icon">💄</div>
-        <h3>Beauty & Personal Care</h3>
-        <p>Beauty, cosmetic and personal care shopping solutions.</p>
-      </article>
-      <article class="service-card">
-        <div class="service-icon">🛍️</div>
-        <h3>Shopping & Retail</h3>
-        <p>Quality products and shopping assistance at competitive costs.</p>
-      </article>
-    </div>
-  </div>
-</section>
+<div class="quoteBox" id="quote">
+<h2>🧾 Get Quotation Online</h2>
+<p style="font-size:14px;color:#666">Choose product, quantity and location. We calculate total instantly.</p>
+<label>1. Select Product</label>
+<select id="pSelect"></select>
+<label>2. Quantity</label>
+<input type="number" id="qty" value="1" min="1" oninput="calc()">
+<label>3. Your Location</label>
+<select id="loc" onchange="calc()">
+<option value="0">Lae Town - Free Pickup</option>
+<option value="50">Lae - Delivery - K50</option>
+<option value="150">Morobe - K150</option>
+<option value="350">Port Moresby - Cargo K350</option>
+<option value="450">Highlands - Mt Hagen / Goroka - K450</option>
+</select>
+<label>4. Your Name</label>
+<input type="text" id="cname" placeholder="e.g. Simon - 8 Mile">
+<div class="total" id="totalBox">Total will show here...</div>
+<button class="order" style="width:100%;padding:15px;border:0;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer" onclick="orderWA()">Place Order on WhatsApp →</button>
+<p style="font-size:12px;color:#888;text-align:center;margin-top:8px">No online payment. You confirm on WhatsApp, pay on pickup / delivery.</p>
+</div>
 
-<section class="section cars-section" id="cars">
-  <div class="container">
-    <p class="eyebrow">JAPANESE VEHICLES</p>
-    <h2>Explore Our Car Categories</h2>
-    <p class="section-intro">Looking for a quality used car? Contact us to enquire about current availability.</p>
-    <div class="car-grid">
-      <article class="car-card">
-        <div class="car-image">🚗</div>
-        <div class="car-info">
-          <h3>Toyota Mark X</h3>
-          <p>Comfort, style and performance.</p>
-          <a href="#contact">Enquire Now →</a>
-        </div>
-      </article>
-      <article class="car-card">
-        <div class="car-image">🚙</div>
-        <div class="car-info">
-          <h3>Toyota Sedan</h3>
-          <p>Practical options for everyday driving.</p>
-          <a href="#contact">Enquire Now →</a>
-        </div>
-      </article>
-      <article class="car-card">
-        <div class="car-image">🚘</div>
-        <div class="car-info">
-          <h3>Nissan Bluebird Sylphy</h3>
-          <p>A stylish and comfortable sedan option.</p>
-          <a href="#contact">Enquire Now →</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
+<div class="contact" id="contact">
+<h2>GET IN TOUCH</h2>
+<h3 style="font-size:24px;margin:6px 0">Contact Our Team</h3>
+<p style="color:#666;font-size:14px">Send us your enquiry and tell us what you're looking for.</p>
+<div style="margin:14px 0;line-height:1.8">
+<b>Location:</b> Lae, Morobe Province, Papua New Guinea<br>
+<b>Phone:</b> +675 7667 3887<br>
+<b>Phone:</b> +675 7469 7351<br>
+<b>Email:</b> zapaiinvestment@outlook.com
+</div>
+<label>Your name</label><input type="text" id="fName" placeholder="Your name">
+<label>Phone number</label><input type="text" id="fPhone" placeholder="+675 ...">
+<label>What do you need?</label><textarea id="fMsg" rows="3" placeholder="e.g. I need 500 bricks to 8 Mile..."></textarea>
+<button onclick="sendEnquiry()" style="width:100%;padding:14px;background:#0f2040;color:#fff;border:0;border-radius:10px;font-weight:bold;margin-top:12px;cursor:pointer">Send Enquiry on WhatsApp</button>
+</div>
+</div>
 
-<section class="section about-section" id="about">
-  <div class="container">
-    <p class="eyebrow">ABOUT OUR BUSINESS</p>
-    <h2>Welcome to Zapai Business Solution</h2>
-    <p>We connect customers with quality products and shopping opportunities. Based in Lae, Morobe Province, PNG, we aim to provide reliable service, value and customer support.</p>
-    <p><strong>Our slogan:</strong> We provide quality products and less cost.</p>
-  </div>
-</section>
+<footer>© 2026 ZAPAI Investment - Lae, PNG | Quality Products. Less Cost.</footer>
 
-<section class="section contact-section" id="contact">
-  <div class="container">
-    <p class="eyebrow">GET IN TOUCH</p>
-    <h2>Contact Our Team</h2>
-    <p>Send us your enquiry and tell us what you're looking for.</p>
-
-    <div class="contact-details">
-      <p><strong>Location:</strong> Lae, Morobe Province, Papua New Guinea</p>
-      <p><strong>Phone:</strong> +675 7667 3887</p>
-      <p><strong>Phone:</strong> +675 7469 7351</p>
-      <p><strong>Email:</strong> zapaiinvestment@outlook.com</p>
-    </div>
-
-    <form id="enquiryForm">
-      <label for="name">Your name</label>
-      <input id="name" name="name" type="text" required>
-
-      <label for="phone">Phone number</label>
-      <input id="phone" name="phone" type="tel" required>
-
-      <label for="car_interest">What are you interested in?</label>
-      <select id="car_interest" name="car_interest">
-        <option value="Used Cars">Used Cars from Japan</option>
-        <option value="Toyota Mark X">Toyota Mark X</option>
-        <option value="Toyota Sedan">Toyota Sedan</option>
-        <option value="Nissan Bluebird Sylphy">Nissan Bluebird Sylphy</option>
-        <option value="Beauty Products">Beauty & Personal Care</option>
-        <option value="Shopping & Retail">Shopping & Retail</option>
-        <option value="Other">Other enquiry</option>
-      </select>
-
-      <label for="message">Your message</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-
-      <input type="text" name="website" id="website" class="hidden-field" tabindex="-1" autocomplete="off">
-
-      <button class="btn btn-primary" type="submit">Send Enquiry</button>
-      <p id="formMessage" role="status"></p>
-    </form>
-
-    <a class="btn btn-whatsapp" href="https://wa.me/67576673887">Chat with us on WhatsApp</a>
-  </div>
-</section>
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <a class="brand footer-brand" href="#home">ZAPAI<span>.</span></a>
-    <p>Zapai Business Solution | Lizzy Online Quality Used Car Shopping</p>
-    <p>Lae, Morobe Province, Papua New Guinea</p>
-    <p>We provide quality products and less cost.</p>
-    <small>© <span id="year">2026</span> Zapai Business Solution. All rights reserved.</small>
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
-<script src="script.js"></script>
+<script>
+const products=[
+{id:1,cat:"Bricks",name:"PNG Red Clay Bricks",desc:"Strong local red bricks. Perfect for houses, fences.",price:3.5,unit:"per brick",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600"},
+{id:2,cat:"Bricks",name:"Concrete Blocks 6 inch",desc:"Standard 6\" block for foundation & walls.",price:5,unit:"per block",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600"},
+{id:3,cat:"Construction",name:"House Foundation / Slab",desc:"Labour + materials. Quote per m2. Lae & Morobe.",price:180,unit:"per m2",img:"https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600"},
+{id:4,cat:"Construction",name:"Fencing - Chainwire / Iron",desc:"Supply & install. Secure your yard.",price:95,unit:"per metre",img:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600"},
+{id:5,cat:"Welding",name:"Steel Gate - Custom Made",desc:"Made to your size. Strong PNG steel.",price:850,unit:"from",img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"},
+{id:6,cat:"Welding",name:"Water Tank Stand",desc:"Heavy duty stand for 1000L - 5000L tank.",price:1200,unit:"from",img:"https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600"},
+{id:7,cat:"Logistics",name:"Lae to POM Cargo - Carton",desc:"Reliable cargo. Lae to Port Moresby.",price:45,unit:"per carton",img:"https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600"},
+{id:8,cat:"Logistics",name:"Truck Hire - Highlands",desc:"Truck + driver. Mt Hagen, Goroka, Madang.",price:1200,unit:"per trip",img:"https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600"},
+{id:9,cat:"Laundry",name:"Wash & Iron",desc:"Pickup in Lae. Fresh, folded, fast.",price:5,unit:"per kg",img:"https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=600"},
+{id:10,cat:"Laundry",name:"Bulk Laundry - Guesthouse",desc:"For lodges, guesthouses, offices. Weekly pickup.",price:4,unit:"per kg",img:"https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=600"},
+{id:11,cat:"Beauty",name:"Bilum Bag - Handmade Morobe",desc:"Authentic PNG bilum. Only in PNG.",price:120,unit:"each",img:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600"},
+{id:12,cat:"Beauty",name:"Hair Braiding + Wig Install",desc:"Lae salon. Neat, long-lasting.",price:80,unit:"per person",img:"https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600"},
+{id:13,cat:"Beauty",name:"Sepik Carving / Artefact",desc:"Hand-carved Sepik art. Real PNG culture.",price:250,unit:"each",img:"https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600"},
+{id:14,cat:"Resellers",name:"PNG Single Origin Coffee 1kg",desc:"Highlands Arabica. Fresh roast.",price:65,unit:"per kg",img:"https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600"},
+{id:15,cat:"Resellers",name:"PNG Vanilla Beans 100g",desc:"Premium vanilla from East Sepik.",price:150,unit:"per 100g",img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=600"},
+{id:16,cat:"Resellers",name:"PNG Coconut Oil 500ml",desc:"Cold-pressed, pure. For skin & cooking.",price:45,unit:"per bottle",img:"https://images.unsplash.com/photo-1601049676869-702ea24cfd58?w=600"},
+];
+let currentCat='all';
+function render(){
+  const grid=document.getElementById('grid');
+  grid.innerHTML='';
+  products.filter(p=>currentCat==='all'||p.cat===currentCat).forEach(p=>{
+    grid.innerHTML+=`<div class="card"><img src="${p.img}"><div class="pad"><span class="tag">${p.cat.toUpperCase()}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price">K${p.price} <small>${p.unit}</small></div><button class="quote" onclick="selectProduct(${p.id})">Get Quotation</button><button class="order" onclick="quickOrder(${p.id})">Order on WhatsApp</button></div></div>`;
+  });
+}
+function filterCat(cat,btn){currentCat=cat;document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();}
+function fillSelect(){
+  const s=document.getElementById('pSelect');
+  s.innerHTML=products.map(p=>`<option value="${p.id}">${p.name} - K${p.price} ${p.unit}</option>`).join('');
+  s.onchange=calc;
+}
+function getSel(){return products.find(p=>p.id==document.getElementById('pSelect').value)}
+function calc(){
+  const p=getSel(); const q=parseInt(document.getElementById('qty').value)||1;
+  const locEl=document.getElementById('loc'); const del=parseInt(locEl.value);
+  const locText=locEl.options[locEl.selectedIndex].text;
+  const sub=p.price*q; const total=sub+del;
+  document.getElementById('totalBox').innerHTML=`Product: ${p.name}<br>Qty: ${q} x K${p.price} = K${sub.toFixed(2)}<br>Delivery: ${locText} = K${del}<br><span style="font-size:20px">TOTAL QUOTATION: K${total.toFixed(2)}</span>`;
+  return {p,q,del,total,locText};
+}
+function selectProduct(id){document.getElementById('pSelect').value=id;calc();document.getElementById('quote').scrollIntoView({behavior:'smooth'});}
+function quickOrder(id){selectProduct(id);setTimeout(orderWA,600);}
+function orderWA(){
+  const r=calc(); const name=document.getElementById('cname').value||'Customer';
+  const msg=`Hello ZAPAI, I want to order:%0A%0AProduct: ${r.p.name}%0AQty: ${r.q} x K${r.p.price} = K${(r.p.price*r.q).toFixed(2)}%0ADelivery: ${r.locText} = K${r.del}%0ATOTAL QUOTATION: K${r.total.toFixed(2)}%0A%0AMy name: ${name}%0ALocation: Lae / PNG`;
+  window.open(`https://wa.me/67576673887?text=${msg}`,'_blank');
+}
+function sendEnquiry(){
+  const n=document.getElementById('fName').value||'Customer';
+  const ph=document.getElementById('fPhone').value||'';
+  const m=document.getElementById('fMsg').value||'I need a quotation';
+  window.open(`https://wa.me/67576673887?text=Hello ZAPAI, I'm ${n} (${ph}). ${encodeURIComponent(m)}`,'_blank');
+}
+render(); fillSelect(); calc();
+</script>
 </body>
 </html>
