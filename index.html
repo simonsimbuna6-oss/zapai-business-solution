@@ -176,9 +176,17 @@ let currentCat='all';
 function render(){
   const grid=document.getElementById('grid');
   grid.innerHTML='';
-  products.filter(p=>currentCat==='all'||p.cat===currentCat).forEach(p=>{
+  const list = products.filter(p=>currentCat==='all'||p.cat===currentCat);
+  list.forEach((p,i)=>{
+    if(i===4 && currentCat==='all'){
+      grid.innerHTML+=`<div class="card" style="background:#1877F2;color:white;border:0;"><div class="pad" style="text-align:center;padding:22px 16px;"><div style="font-size:36px;">🚗</div><h3 style="color:white;font-size:20px;">Need a Car?</h3><p style="color:#dbeafe;">Mark X, Land Cruiser, Hilux & More - Latest stock on Facebook</p><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" style="background:white;color:#1877F2;padding:12px 18px;border-radius:999px;font-weight:800;display:block;margin-top:12px;text-decoration:none;">See Cars on Facebook →</a><p style="color:#bfdbfe;font-size:11px;margin-top:8px;">AD • ZAPAI</p></div></div>`;
+    }
+    if(i===10 && currentCat==='all'){
+      grid.innerHTML+=`<div class="card" style="background:#ff6b00;color:white;border:0;"><div class="pad" style="text-align:center;padding:22px 16px;"><div style="font-size:36px;">📋</div><h3 style="color:white;font-size:20px;">Start Your Business Today!</h3><p style="color:#ffedd5;">Registration From K500 • Profile From K300 • Done in 3-5 Days</p><a href="https://wa.me/67574697351?text=Hi%20ZAPAI%2C%20I%20saw%20your%20AD%20in%20products%20-%20I%20want%20Business%20Registration" target="_blank" style="background:white;color:#ff6b00;padding:12px 18px;border-radius:999px;font-weight:800;display:block;margin-top:12px;text-decoration:none;">Claim Offer →</a><p style="color:#ffedd5;font-size:11px;margin-top:8px;">AD • ZAPAI BUSINESS SERVICES</p></div></div>`;
+    }
     grid.innerHTML+=`<div class="card"><img src="${p.img}"><div class="pad"><span class="tag">${p.cat.toUpperCase()}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price">K${p.price} <small>${p.unit}</small></div><button class="quote" onclick="selectProduct(${p.id})">Get Quotation</button><button class="order" onclick="quickOrder(${p.id})">Order on WhatsApp</button></div></div>`;
   });
+} });
 }
 function filterCat(cat,btn){currentCat=cat;document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();}
 function fillSelect(){
