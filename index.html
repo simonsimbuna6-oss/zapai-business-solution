@@ -184,7 +184,7 @@ function render(){
     if(i==10){
       grid.innerHTML+=`<div class="card" style="background:#ff6b00;color:white;border:0;"><div class="pad" style="text-align:center;padding:22px 16px;"><h3 style="color:white;font-size:20px;">Start Your Business Today!</h3><p style="color:#ffedd5;">Registration From K500 - Profile From K300 - Done in 3-5 Days</p><a href="https://wa.me/67574697351?text=Hi ZAPAI, I want Business Registration" target="_blank" style="background:white;color:#ff6b00;padding:12px 18px;border-radius:999px;font-weight:800;display:block;margin-top:12px;text-decoration:none;">Claim Offer</a><p style="color:#ffedd5;font-size:11px;margin-top:8px;">AD - ZAPAI BUSINESS SERVICES</p></div></div>`;
     }
-    grid.innerHTML+=`<div class="card"><img src="${p.img}"><div class="pad"><span class="tag">${p.cat.toUpperCase()}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price">K${p.price} <small>${p.unit}</small></div><button class="quote" onclick="selectProduct(${p.id})">Get Quotation</button><button class="order" onclick="quickOrder(${p.id})">Order on WhatsApp</button></div></div>`;
+    grid.innerHTML+=`<div class="card"><img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async"><div class="pad"><span class="tag">${p.cat.toUpperCase()}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price">K${p.price} <small>${p.unit}</small></div><button class="quote" onclick="selectProduct(${p.id})">Get Quotation</button><button class="order" onclick="quickOrder(${p.id})">Order on WhatsApp</button></div></div>`;
   });
 }
 function filterCat(cat,btn){currentCat=cat;document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();}
@@ -195,25 +195,71 @@ function fillSelect(){
 }
 function getSel(){return products.find(p=>p.id==document.getElementById('pSelect').value)}
 function calc(){
-  const p=getSel(); const q=parseInt(document.getElementById('qty').value)||1;
-  const locEl=document.getElementById('loc'); const del=parseInt(locEl.value);
-  const locText=locEl.options[locEl.selectedIndex].text;
-  const sub=p.price*q; const total=sub+del;
-  document.getElementById('totalBox').innerHTML=`Product: ${p.name}<br>Qty: ${q} x K${p.price} = K${sub.toFixed(2)}<br>Delivery: ${locText} = K${del}<br><span style="font-size:20px">TOTAL QUOTATION: K${total.toFixed(2)}</span>`;
-  return {p,q,del,total,locText};
+  const p = getSel();
+  if (!p) return null;
+  const qtyInput = document.getElementById('qty');
+  const q = Math.max(1, Math.floor(Number(qtyInput.value) || 1));
+  qtyInput.value = q;
+  const locEl = document.getElementById('loc');
+  const del = Number(locEl.value) || 0;
+  const locText = locEl.options[locEl.selectedIndex].text;
+  const sub = p.price * q;
+  const total = sub + del;
+  document.getElementById('totalBox').innerHTML =
+    `Product: ${p.name}<br>
+    Qty: ${q} x K${p.price} = K${sub.toFixed(2)}<br>
+    Delivery: ${locText} = K${del.toFixed(2)}<br>
+    <span style="font-size:20px">
+    TOTAL QUOTATION: K${total.toFixed(2)}
+    </span>`;
+  return {p, q, del, total, locText};
 }
 function selectProduct(id){document.getElementById('pSelect').value=id;calc();document.getElementById('quote').scrollIntoView({behavior:'smooth'});}
-function quickOrder(id){selectProduct(id);setTimeout(orderWA,600);}
+function quickOrder(id){
+  selectProduct(id);
+  orderWA();
+}
 function orderWA(){
-  const r=calc(); const name=document.getElementById('cname').value||'Customer';
-  const msg=`Hello ZAPAI, I want to order:%0A%0AProduct: ${r.p.name}%0AQty: ${r.q} x K${r.p.price} = K${(r.p.price*r.q).toFixed(2)}%0ADelivery: ${r.locText} = K${r.del}%0ATOTAL QUOTATION: K${r.total.toFixed(2)}%0A%0AMy name: ${name}%0ALocation: Lae / PNG`;
-  window.open(`https://wa.me/67576673887?text=${msg}`,'_blank');
+  const r = calc();
+  if (!r) return;
+  const name = document.getElementById('cname').value.trim() || 'Customer';
+  const msg =
+    `Hello ZAPAI, I want to order:
+
+Product: ${r.p.name}
+Quantity: ${r.q}
+Unit price: K${r.p.price}
+Subtotal: K${(r.p.price * r.q).toFixed(2)}
+Delivery: ${r.locText}
+Delivery charge: K${r.del.toFixed(2)}
+Estimated total: K${r.total.toFixed(2)}
+
+Customer name / area: ${name}
+
+Please confirm availability and final price.`;
+  window.open(
+    `https://wa.me/67576673887?text=${encodeURIComponent(msg)}`,
+    '_blank',
+    'noopener,noreferrer'
+  );
 }
 function sendEnquiry(){
-  const n=document.getElementById('fName').value||'Customer';
-  const ph=document.getElementById('fPhone').value||'';
-  const m=document.getElementById('fMsg').value||'I need a quotation';
-  window.open(`https://wa.me/67576673887?text=Hello ZAPAI, I'm ${n} (${ph}). ${encodeURIComponent(m)}`,'_blank');
+  const n = document.getElementById('fName').value.trim() || 'Customer';
+  const ph = document.getElementById('fPhone').value.trim() || 'Not provided';
+  const m = document.getElementById('fMsg').value.trim() || 'I need a quotation';
+  const msg =
+    `Hello ZAPAI Investment.
+
+Name: ${n}
+Phone: ${ph}
+
+Enquiry:
+${m}`;
+  window.open(
+    `https://wa.me/67576673887?text=${encodeURIComponent(msg)}`,
+    '_blank',
+    'noopener,noreferrer'
+  );
 }
 render(); fillSelect(); calc();
 </script>
