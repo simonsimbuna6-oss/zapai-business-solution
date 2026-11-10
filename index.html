@@ -42,7 +42,7 @@ header small{display:block;font-size:10px;letter-spacing:1.5px;color:#a8b2c5;fon
 .quote{background:#0f2040;color:#fff}.order{background:#25D366;color:#fff}
 .quoteBox{background:#fff;border-radius:20px;padding:20px;margin-top:22px;border:1px solid #eef0f4;box-shadow:0 4px 18px rgba(0,0,0,.05)}
 .quoteBox label{font-weight:800;font-size:13px;display:block;margin-top:14px}
-.quoteBox select,.quoteBox input,.contact input,.contact textarea{width:100%;padding:13px;border:1px solid #dde2ea;border-radius:11px;margin-top:6px;font-size:15px;background:#fbfbfc}
+.quoteBox select,.quoteBox input,.contact input,.contact textarea,.contact select{width:100%;padding:13px;border:1px solid #dde2ea;border-radius:11px;margin-top:6px;font-size:15px;background:#fbfbfc}
 .total{background:#fff7d6;padding:14px;border-radius:12px;margin-top:16px;font-weight:700;line-height:1.6;font-size:14px}
 .why{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:18px}
 @media(max-width:640px){.why{grid-template-columns:1fr}}
@@ -56,13 +56,12 @@ header small{display:block;font-size:10px;letter-spacing:1.5px;color:#a8b2c5;fon
 .contact-info{background:#f6f7f9;border-radius:12px;padding:14px;margin:14px 0;line-height:1.9;font-size:14px}
 footer{background:#0f2040;color:#b8c0d1;text-align:center;padding:24px 16px;font-size:13px;line-height:1.7}
 footer b{color:#fff;font-size:16px}
+#formMessage{margin-top:10px;font-weight:700;font-size:14px;color:#0f2040;text-align:center}
 </style>
 </head>
 <body>
 <header><div><b>ZAPAI<span>.</span></b><small>LAE • MOROBE • PNG</small></div><a class="btn wa" href="https://wa.me/67576673887?text=Hello%20ZAPAI%2C%20I%20want%20to%20order" target="_blank">WhatsApp</a></header>
-
 <div class="topbar">Follow us on Facebook for latest cars - <a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank">Click Here</a></div>
-
 <div class="hero">
 <h1>Quality Products.<br><span>Less Cost.</span></h1>
 <p>Logistics • Laundry • Welding • Bricks • Construction • Beauty • Business Services<br>Lae, Morobe Province, Papua New Guinea</p>
@@ -70,10 +69,8 @@ footer b{color:#fff;font-size:16px}
 <a class="btn" href="#quote" style="margin-left:6px">Get Quotation</a>
 <div class="trust"><span>Lae Based</span><span>Fast Response on WhatsApp</span><span>Pay on Pickup / Delivery</span></div>
 </div>
-
 <div class="wrap" id="products">
 <div class="car-box"><b>Looking for Cars? Mark X, Land Cruiser & More</b><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" class="btn" style="background:#1877F2;padding:10px 16px;white-space:nowrap">See Cars on Facebook</a></div>
-
 <h2 class="section-title">Select My Best Products - Only Available in PNG</h2>
 <p class="section-sub">Tap a category to filter. Tap Get Quotation to calculate, then Order on WhatsApp.</p>
 <div class="filters" id="filters">
@@ -87,7 +84,6 @@ footer b{color:#fff;font-size:16px}
 <button onclick="filterCat('Resellers',this)">Resellers</button>
 </div>
 <div class="grid" id="grid"></div>
-
 <div class="quoteBox" id="quote">
 <h2>Get Quotation Online</h2>
 <p style="font-size:14px;color:#666">Choose product, quantity and location. We calculate total instantly.</p>
@@ -106,11 +102,9 @@ footer b{color:#fff;font-size:16px}
 <button class="order" style="width:100%;padding:15px;border:0;border-radius:12px;font-weight:800;font-size:16px;cursor:pointer;margin-top:12px" onclick="orderWA()">Place Order on WhatsApp</button>
 <p style="font-size:12px;color:#888;text-align:center;margin-top:8px">No online payment. You confirm on WhatsApp, pay on pickup / delivery.</p>
 </div>
-
 <div id="business-services" style="margin-top:26px">
 <h2 class="section-title">Business Services - Lae, Morobe Province</h2>
 <p class="section-sub">We help you register & grow your business in PNG. Fast paperwork, clear price, WhatsApp support.</p>
-
 <div class="biz-card white">
 <span class="badge" style="background:#e6fffa;color:#008a6d">MOST POPULAR</span>
 <h3 style="margin:8px 0 4px;font-size:20px">Business Registration</h3>
@@ -119,7 +113,6 @@ footer b{color:#fff;font-size:16px}
 <a href="https://wa.me/67574697351?text=Hi%20ZAPAI%2C%20I%20want%20Business%20Registration" target="_blank" class="btn wa" style="border-radius:10px">Order on WhatsApp</a>
 <p style="font-size:12px;color:#888;margin-top:8px">IPA + TIN + Business Name checklist included</p>
 </div>
-
 <div class="biz-card navy">
 <h3 style="font-size:20px">Business Profiling / Company Profile</h3>
 <p style="color:#d6dcea;font-size:14px;margin-top:6px">Professional Company Profile PDF for contracts, loans, tenders & clients.</p>
@@ -128,32 +121,35 @@ footer b{color:#fff;font-size:16px}
 <p style="font-size:12px;color:#b8c0d1;margin-top:8px">Ready for bank, tender & client presentation</p>
 </div>
 </div>
-
 <div class="why">
 <div><b>Lae Based</b><span>Pickup in Lae Town. Delivery across Morobe & PNG.</span></div>
 <div><b>WhatsApp Ordering</b><span>No app needed. Order in 2 minutes.</span></div>
 <div><b>Fair Price</b><span>Quality Products. Less Cost. No hidden fees.</span></div>
 </div>
-
 <div class="contact" id="contact">
 <h2 style="font-size:13px;letter-spacing:1.5px;color:#00a884">GET IN TOUCH</h2>
 <h3 style="font-size:24px;margin:6px 0">Contact Our Team</h3>
-<p style="color:#666;font-size:14px">Send us your enquiry and tell us what you're looking for.</p>
+<p style="color:#666;font-size:14px">Send us your enquiry - it saves to our system AND opens WhatsApp.</p>
 <div class="contact-info">
 <b>Location:</b> Lae, Morobe Province, Papua New Guinea<br>
 <b>Phone:</b> +675 7667 3887 / +675 7469 7351<br>
 <b>Email:</b> zapaiinvestment@outlook.com
 </div>
-<label style="font-weight:800;font-size:13px">Your name</label><input type="text" id="fName" placeholder="Your name">
-<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">Phone number</label><input type="text" id="fPhone" placeholder="+675 ...">
-<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">What do you need?</label><textarea id="fMsg" rows="3" placeholder="e.g. I need 500 bricks to 8 Mile..."></textarea>
-<button onclick="sendEnquiry()" style="width:100%;padding:14px;background:#0f2040;color:#fff;border:0;border-radius:11px;font-weight:800;margin-top:14px;cursor:pointer">Send Enquiry on WhatsApp</button>
+<label style="font-weight:800;font-size:13px">Your name *</label><input type="text" id="fName" placeholder="Your name">
+<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">Phone number *</label><input type="text" id="fPhone" placeholder="+675 ...">
+<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">Interested in a Car?</label>
+<select id="fCar"><option value="">No - General Enquiry</option><option value="Mark X">Mark X</option><option value="Land Cruiser">Land Cruiser</option><option value="Hilux">Hilux</option><option value="Other Car">Other Car</option></select>
+<label style="font-weight:800;font-size:13px;display:block;margin-top:12px">What do you need? *</label><textarea id="fMsg" rows="3" placeholder="e.g. I need 500 bricks to 8 Mile..."></textarea>
+<button onclick="sendEnquiry()" id="enquiryBtn" style="width:100%;padding:14px;background:#0f2040;color:#fff;border:0;border-radius:11px;font-weight:800;margin-top:14px;cursor:pointer">Send Enquiry</button>
+<div id="formMessage"></div>
 </div>
 </div>
-
 <footer><b>ZAPAI Investment</b><br>Lae, Morobe Province, Papua New Guinea<br>Quality Products. Less Cost.<br><br><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" style="color:#fff;background:#1877F2;padding:10px 18px;border-radius:999px;font-weight:800;display:inline-block">Follow For Latest Cars on Facebook</a><br><br><span>© 2026 ZAPAI Investment - WhatsApp 67576673887 / 67574697351</span></footer>
-
 <script>
+const ZAPAI_CONFIG = {
+  SUPABASE_URL: "https://pexbgqyqamnbzjzgqxvb.supabase.co",
+  SUPABASE_KEY: "sb_publishable_G_9TK4ueHJBBORUI8f5LTg_IX2tltY6"
+};
 const products=[
 {id:1,cat:"Bricks",name:"PNG Red Clay Bricks",desc:"Strong local red bricks. Perfect for houses, fences.",price:3.5,unit:"per brick",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600"},
 {id:2,cat:"Bricks",name:"Concrete Blocks 6 inch",desc:"Standard 6 inch block for foundation & walls.",price:5,unit:"per block",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600"},
@@ -215,51 +211,56 @@ function calc(){
   return {p, q, del, total, locText};
 }
 function selectProduct(id){document.getElementById('pSelect').value=id;calc();document.getElementById('quote').scrollIntoView({behavior:'smooth'});}
-function quickOrder(id){
-  selectProduct(id);
-  orderWA();
-}
+function quickOrder(id){ selectProduct(id); orderWA(); }
 function orderWA(){
   const r = calc();
   if (!r) return;
   const name = document.getElementById('cname').value.trim() || 'Customer';
-  const msg =
-    `Hello ZAPAI, I want to order:
-
-Product: ${r.p.name}
-Quantity: ${r.q}
-Unit price: K${r.p.price}
-Subtotal: K${(r.p.price * r.q).toFixed(2)}
-Delivery: ${r.locText}
-Delivery charge: K${r.del.toFixed(2)}
-Estimated total: K${r.total.toFixed(2)}
-
-Customer name / area: ${name}
-
-Please confirm availability and final price.`;
-  window.open(
-    `https://wa.me/67576673887?text=${encodeURIComponent(msg)}`,
-    '_blank',
-    'noopener,noreferrer'
-  );
+  const msg = `Hello ZAPAI, I want to order:\n\nProduct: ${r.p.name}\nQuantity: ${r.q}\nUnit price: K${r.p.price}\nSubtotal: K${(r.p.price * r.q).toFixed(2)}\nDelivery: ${r.locText}\nDelivery charge: K${r.del.toFixed(2)}\nEstimated total: K${r.total.toFixed(2)}\n\nCustomer name / area: ${name}\n\nPlease confirm availability and final price.`;
+  window.open(`https://wa.me/67576673887?text=${encodeURIComponent(msg)}`,'_blank','noopener,noreferrer');
 }
-function sendEnquiry(){
-  const n = document.getElementById('fName').value.trim() || 'Customer';
-  const ph = document.getElementById('fPhone').value.trim() || 'Not provided';
-  const m = document.getElementById('fMsg').value.trim() || 'I need a quotation';
-  const msg =
-    `Hello ZAPAI Investment.
-
-Name: ${n}
-Phone: ${ph}
-
-Enquiry:
-${m}`;
-  window.open(
-    `https://wa.me/67576673887?text=${encodeURIComponent(msg)}`,
-    '_blank',
-    'noopener,noreferrer'
-  );
+async function sendEnquiry() {
+  const n = document.getElementById('fName').value.trim();
+  const ph = document.getElementById('fPhone').value.trim();
+  const car = document.getElementById('fCar').value || "";
+  const m = document.getElementById('fMsg').value.trim();
+  const msgEl = document.getElementById('formMessage');
+  const btn = document.getElementById('enquiryBtn');
+  if (!n || !ph || !m) {
+    msgEl.textContent = "Please complete name, phone and message.";
+    return;
+  }
+  const waMsg = `Hello ZAPAI Investment.\n\n` + `Name: ${n}\n` + `Phone: ${ph}\n` + `Car Interest: ${car || "None"}\n\n` + `Enquiry:\n${m}`;
+  const waUrl = `https://wa.me/67576673887?text=${encodeURIComponent(waMsg)}`;
+  const waWindow = window.open(waUrl, "_blank");
+  btn.disabled = true;
+  btn.textContent = "Sending...";
+  msgEl.textContent = "Submitting your enquiry...";
+  try {
+    const res = await fetch(ZAPAI_CONFIG.SUPABASE_URL + "/rest/v1/inquiries", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "apikey": ZAPAI_CONFIG.SUPABASE_KEY, "Authorization": "Bearer " + ZAPAI_CONFIG.SUPABASE_KEY, "Prefer": "return=minimal" },
+      body: JSON.stringify({ name: n, phone: ph, car_interest: car, message: m })
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(errorText || "Database rejected the enquiry.");
+    }
+    msgEl.textContent = "Success! Your enquiry was saved. WhatsApp has been opened.";
+    document.getElementById('fName').value = "";
+    document.getElementById('fPhone').value = "";
+    document.getElementById('fCar').value = "";
+    document.getElementById('fMsg').value = "";
+  } catch (error) {
+    console.error("ZAPAI enquiry error:", error);
+    msgEl.textContent = "WhatsApp was opened, but the enquiry was NOT saved to our database. Please try again later or contact us on WhatsApp.";
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Send Enquiry";
+  }
+  if (!waWindow) {
+    msgEl.textContent += " If WhatsApp did not open, please allow pop-ups or contact us directly on +675 7667 3887.";
+  }
 }
 render(); fillSelect(); calc();
 </script>
