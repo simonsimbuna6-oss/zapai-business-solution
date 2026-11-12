@@ -62,6 +62,8 @@ footer{background:#0f2040;color:#b8c0d1;text-align:center;padding:24px 16px;font
 footer b{color:#fff;font-size:16px}
 #formMessage{margin-top:12px;font-weight:700;font-size:14px;color:#0f2040;text-align:center;min-height:20px}
 .honeypot{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.qtyBtn{width:50px;height:50px;font-size:24px;font-weight:800;border:1px solid #dde2ea;border-radius:11px;background:#fff;cursor:pointer;flex-shrink:0}
+.qtyBtn.plus{background:#0f2040;color:#fff}
 </style>
 </head>
 <body>
@@ -96,7 +98,12 @@ footer b{color:#fff;font-size:16px}
 <h2>Get Quotation Online</h2>
 <p style="font-size:14px;color:#666">Choose product, quantity and location. We calculate total instantly.</p>
 <label>1. Select Product</label><select id="pSelect"></select>
-<label>2. Quantity</label><input type="number" id="qty" value="1" min="1" oninput="calc()">
+<label>2. Quantity</label>
+<div style="display:flex;gap:8px;align-items:center">
+<button type="button" class="qtyBtn" onclick="changeQty(-1)">-</button>
+<input type="number" id="qty" value="1" min="1" inputmode="numeric" oninput="calc()" onblur="fixQty()" style="text-align:center;font-weight:800;font-size:18px">
+<button type="button" class="qtyBtn plus" onclick="changeQty(1)">+</button>
+</div>
 <label>3. Your Location</label>
 <select id="loc" onchange="calc()">
 <option value="0">Lae Town - Free Pickup</option>
@@ -203,12 +210,30 @@ function fillSelect(){
   s.onchange=calc;
 }
 function getSel(){return products.find(p=>p.id==document.getElementById('pSelect').value)}
+function changeQty(d){
+  const el=document.getElementById('qty');
+  let v=parseInt(el.value||"1",10);
+  if(isNaN(v)) v=1;
+  v=Math.max(1,v+d);
+  el.value=v;
+  calc();
+}
+function fixQty(){
+  const el=document.getElementById('qty');
+  let v=parseInt(el.value,10);
+  if(isNaN(v) || v<1) el.value=1;
+  calc();
+}
 function calc(){
   const p = getSel();
   if (!p) return null;
   const qtyInput = document.getElementById('qty');
-  const q = Math.max(1, Math.floor(Number(qtyInput.value) || 1));
-  qtyInput.value = q;
+  let q = parseInt(qtyInput.value,10);
+  if(isNaN(q) || qtyInput.value===""){
+    document.getElementById('totalBox').innerHTML="Type quantity...";
+    return null;
+  }
+  q = Math.max(1, q);
   const locEl = document.getElementById('loc');
   const del = Number(locEl.value) || 0;
   const locText = locEl.options[locEl.selectedIndex].text;
@@ -227,12 +252,19 @@ function selectProduct(id){document.getElementById('pSelect').value=id;calc();do
 function quickOrder(id){selectProduct(id);orderWA();}
 function orderWA(){
   const r = calc();
-  if (!r) return;
+  if (!r){
+    fixQty();
+    const r2 = calc();
+    if(!r2) return;
+    const name2 = document.getElementById('cname').value.trim() || 'Customer';
+    const msg2 = `Hello ZAPAI, I want to order:\n\nProduct: ${r2.p.name}\nQuantity: ${r2.q}\nUnit price: K${r2.p.price}\nSubtotal: K${(r2.p.price * r2.q).toFixed(2)}\nDelivery: ${r2.locText}\nDelivery charge: K${r2.del.toFixed(2)}\nEstimated total: K${r2.total.toFixed(2)}\n\nCustomer name / area: ${name2}\n\nPlease confirm availability and final price.`;
+    window.open(`https://wa.me/67576673887?text=${encodeURIComponent(msg2)}`,'_blank','noopener,noreferrer');
+    return;
+  }
   const name = document.getElementById('cname').value.trim() || 'Customer';
   const msg = `Hello ZAPAI, I want to order:\n\nProduct: ${r.p.name}\nQuantity: ${r.q}\nUnit price: K${r.p.price}\nSubtotal: K${(r.p.price * r.q).toFixed(2)}\nDelivery: ${r.locText}\nDelivery charge: K${r.del.toFixed(2)}\nEstimated total: K${r.total.toFixed(2)}\n\nCustomer name / area: ${name}\n\nPlease confirm availability and final price.`;
   window.open(`https://wa.me/67576673887?text=${encodeURIComponent(msg)}`,'_blank','noopener,noreferrer');
 }
-// --- FIXED: LIVE FROM SUPABASE / ADMIN - NO sort_order, NO active filter ---
 async function loadFromAdmin(){
   try{
     const cfg=window.ZAPAI_CONFIG;
