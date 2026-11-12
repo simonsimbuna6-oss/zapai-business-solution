@@ -1,117 +1,107 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZAPAI Admin - PRIVATE</title>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZAPAI Admin V3</title>
 <style>
-*{box-sizing:border-box;font-family:Inter,system-ui,Arial} body{background:#f6f7f9;margin:0;padding:16px;color:#0f2040}
-h1{font-size:22px} .card{background:#fff;border-radius:14px;padding:14px;margin:12px 0;border:1px solid #eef0f4}
-input,select,textarea{width:100%;padding:12px;border:1px solid #dde2ea;border-radius:10px;margin-top:6px;font-size:15px}
-label{font-weight:800;font-size:13px;display:block;margin-top:12px}
-button{width:100%;padding:13px;border:0;border-radius:11px;font-weight:800;cursor:pointer;margin-top:10px;font-size:15px}
-.save{background:#00b894;color:#fff} .del{background:#ffe6e6;color:#c00} .add{background:#0f2040;color:#fff}
-img{width:100%;height:140px;object-fit:cover;border-radius:10px;background:#eee}
-#login{max-width:400px;margin:60px auto;text-align:center}
-.hidden{display:none}
-</style>
-</head>
+*{box-sizing:border-box}body{font-family:system-ui;background:#eef2f7;margin:0;padding:12px;color:#0f2040}
+.card{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+h1{font-size:20px;text-align:center}h3{margin:0 0 8px}input,select,textarea{width:100%;padding:10px;margin:4px 0 10px;border:1px solid #ddd;border-radius:8px;font-size:15px}
+label{font-size:12px;font-weight:700}button{width:100%;padding:12px;border:0;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;margin-top:4px}
+.btn-green{background:#00b894;color:#fff}.btn-navy{background:#0f2040;color:#fff}.btn-red{background:#ffecec;color:#c00}.btn-grey{background:#eee;color:#333}
+img{width:100%;height:160px;object-fit:cover;border-radius:8px;background:#eee}
+#login{max-width:400px;margin:60px auto;text-align:center}.hidden{display:none}
+.top{display:flex;justify-content:space-between;align-items:center}
+.badge{background:#e6f7ff;padding:6px 10px;border-radius:20px;font-size:12px}
+.preview{border:2px dashed #00b894}
+.small{font-size:12px;color:#666;text-align:center}
+</style></head>
 <body>
-
-<div id="login">
-<h1>ZAPAI ADMIN</h1>
-<p style="color:#666;font-size:14px">Private - Developer Only</p>
-<label>Admin PIN</label>
-<input type="password" id="pin" placeholder="Enter PIN">
-<button class="add" onclick="doLogin()">Login</button>
-<p style="font-size:12px;color:#888">Default PIN: 1234 - Change it in code</p>
+<div id="login" class="card">
+<h1>ZAPAI ADMIN</h1><p>Private - Developer Only</p>
+<label>Admin PIN</label><input id="pin" type="password" inputmode="numeric" placeholder="Enter 6-digit PIN">
+<button class="btn-navy" onclick="login()">Login</button>
 </div>
 
-<div id="panel" class="hidden">
-<h1>ZAPAI Admin ⚙️</h1>
-<p style="font-size:13px;color:#666">Changes here update zapaiinvestment.com instantly</p>
+<div id="app" class="hidden">
+<div class="top"><h1>ZAPAI Admin ⚙️</h1><span class="badge" id="count"></span></div>
+<p class="small">PIN: 759578 • Images save on this phone • Tap Save after edit</p>
 
-<div class="card">
-<h3>Business Settings</h3>
-<label>WhatsApp Number (without +)</label><input id="s_whatsapp" placeholder="67576673887">
-<label>Phone Display</label><input id="s_phone" placeholder="+675 7667 3887">
-<label>Email</label><input id="s_email" placeholder="info@zapaiinvestment.com">
-<button class="save" onclick="saveSettings()">Save Settings</button>
+<div class="card"><h3>Business Settings</h3>
+<label>WhatsApp Number (without +)</label><input id="wa" value="67576673887">
+<label>Phone Display</label><input id="phone" value="+675 7667 3887">
+<label>Email</label><input id="email" value="info@zapaiinvestment.com">
+<button class="btn-green" onclick="saveSettings()">Save Settings ✅</button><p id="msg1" style="font-size:13px;color:green"></p>
 </div>
 
-<div class="card">
-<h3>Add New Product</h3>
-<label>Name</label><input id="n_name" placeholder="e.g. New Brick">
-<label>Category</label><select id="n_cat"><option>Bricks</option><option>Construction</option><option>Welding</option><option>Logistics</option><option>Laundry</option><option>Beauty</option><option>Resellers</option></select>
-<label>Price (K)</label><input type="number" id="n_price" placeholder="3.5">
-<label>Unit</label><input id="n_unit" placeholder="per brick">
-<label>Image Link</label><input id="n_img" placeholder="https://...">
-<label>Description</label><textarea id="n_desc"></textarea>
-<button class="add" onclick="addProduct()">Add Product</button>
+<div class="card"><h3>➕ Add New Product</h3>
+<label>Name *</label><input id="nName" placeholder="e.g. River Sand">
+<label>Category</label><select id="nCat"><option>Bricks</option><option>Blocks</option><option>Sand & Gravel</option><option>Cement</option><option>Timber</option><option>Roofing</option><option>Other</option></select>
+<label>Price (K) *</label><input id="nPrice" type="number" step="0.1" placeholder="3.5">
+<label>Unit</label><input id="nUnit" placeholder="per brick / per bag / per m3">
+<label>📸 Upload Image From Phone</label>
+<input type="file" id="nFile" accept="image/*" onchange="readFile(this,'nImg','nPreview')">
+<img id="nPreview" class="preview" style="display:none">
+<label>OR Paste Image Link</label><input id="nImg" placeholder="https://...">
+<label>Description</label><textarea id="nDesc" placeholder="Strong..."></textarea>
+<button class="btn-navy" onclick="addProduct()">Add Product ✅</button>
 </div>
 
+<div class="card"><h3>🔍 Search</h3><input id="search" oninput="render()" placeholder="Search products..."></div>
 <div id="list"></div>
-<p id="msg" style="text-align:center;font-weight:700"></p>
+<button class="btn-grey" onclick="resetAll()">Reset to Default Products</button>
+<button class="btn-red" onclick="if(confirm('Delete ALL products?')){products=[];save();render();}">Delete ALL Products</button>
+<p class="small">V3 - Upload works offline • Images stored in phone</p>
 </div>
 
 <script>
-// --- PASTE YOUR SUPABASE HERE ---
-const SUPABASE_URL = ""; // e.g. https://xyz.supabase.co
-const SUPABASE_KEY = ""; // your anon key
-const ADMIN_PIN = "1234"; // CHANGE THIS!
-
-let products = [
-{id:1,cat:"Bricks",name:"PNG Red Clay Bricks",desc:"Strong local red bricks.",price:3.5,unit:"per brick",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600"},
-{id:2,cat:"Bricks",name:"Concrete Blocks 6 inch",desc:"Standard 6 inch block.",price:5,unit:"per block",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600"},
+const PIN="759578";
+function login(){ if(document.getElementById('pin').value===PIN){ document.getElementById('login').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); load(); } else alert('Wrong PIN'); }
+let defaults=[
+{id:1,name:"PNG Red Clay Bricks",cat:"Bricks",price:3.5,unit:"per brick",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600",desc:"Strong local red bricks."},
+{id:2,name:"Concrete Blocks 6 inch",cat:"Blocks",price:5,unit:"per block",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600",desc:"Standard 6 inch block."},
+{id:3,name:"River Sand - 1 Cubic Metre",cat:"Sand & Gravel",price:180,unit:"per m3",img:"https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600",desc:"Clean river sand."},
+{id:4,name:"Gravel 20mm - 1 Cubic Metre",cat:"Sand & Gravel",price:200,unit:"per m3",img:"https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600",desc:"20mm gravel for concrete."},
+{id:5,name:"Cement 40kg Bag",cat:"Cement",price:65,unit:"per bag",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600",desc:"Portland cement 40kg."},
+{id:6,name:"Timber 2x4 - 3m",cat:"Timber",price:45,unit:"per length",img:"https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=600",desc:"Treated pine timber."}
 ];
-
-function doLogin(){
-  if(document.getElementById('pin').value === ADMIN_PIN){
-    document.getElementById('login').classList.add('hidden');
-    document.getElementById('panel').classList.remove('hidden');
-    render();
-  } else { alert("Wrong PIN"); }
+let products=JSON.parse(localStorage.getItem('zapai_products_v2')||'null')||defaults;
+let settings=JSON.parse(localStorage.getItem('zapai_settings')||'null')||{wa:"67576673887",phone:"+675 7667 3887",email:"info@zapaiinvestment.com"};
+function save(){ try{ localStorage.setItem('zapai_products_v2',JSON.stringify(products)); localStorage.setItem('zapai_settings',JSON.stringify(settings)); }catch(e){ alert('Image too big! Use smaller photo or link. Try take photo with lower quality.'); } }
+function load(){ document.getElementById('wa').value=settings.wa; document.getElementById('phone').value=settings.phone; document.getElementById('email').value=settings.email; render(); }
+function saveSettings(){ settings={wa:document.getElementById('wa').value,phone:document.getElementById('phone').value,email:document.getElementById('email').value}; save(); document.getElementById('msg1').textContent='✅ Saved!'; }
+function readFile(input, targetId, previewId){
+  let file=input.files[0]; if(!file) return;
+  let r=new FileReader();
+  r.onload=function(e){ document.getElementById(targetId).value=e.target.result; if(previewId){ let p=document.getElementById(previewId); p.src=e.target.result; p.style.display='block'; } };
+  r.readAsDataURL(file);
+}
+function addProduct(){
+  let name=document.getElementById('nName').value.trim();
+  if(!name) return alert('Enter product name');
+  let p={id:Date.now(),name:name,cat:document.getElementById('nCat').value,price:parseFloat(document.getElementById('nPrice').value)||0,unit:document.getElementById('nUnit').value,img:document.getElementById('nImg').value||'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600',desc:document.getElementById('nDesc').value};
+  products.unshift(p); save(); render();
+  document.getElementById('nName').value=''; document.getElementById('nPrice').value=''; document.getElementById('nImg').value=''; document.getElementById('nDesc').value=''; document.getElementById('nPreview').style.display='none';
+  alert('✅ Product Added!');
 }
 function render(){
-  const list = document.getElementById('list');
-  list.innerHTML = "<h3>All Products ("+products.length+") - Tap to Edit</h3>";
-  products.forEach(p=>{
-    list.innerHTML += `<div class="card">
-      <img src="${p.img}">
-      <label>Name</label><input value="${p.name}" onchange="updateP(${p.id},'name',this.value)">
-      <label>Price K</label><input type="number" value="${p.price}" onchange="updateP(${p.id},'price',this.value)">
-      <label>Image Link</label><input value="${p.img}" onchange="updateP(${p.id},'img',this.value)">
-      <label>Description</label><textarea onchange="updateP(${p.id},'desc',this.value)">${p.desc}</textarea>
-      <button class="save" onclick="saveProduct(${p.id})">Save This Product</button>
-      <button class="del" onclick="deleteProduct(${p.id})">Delete</button>
+  let q=(document.getElementById('search').value||'').toLowerCase();
+  let list=document.getElementById('list'); document.getElementById('count').textContent=products.length+' products'; list.innerHTML='';
+  if(products.length===0){ list.innerHTML='<div class="card"><p>No products. Add one above.</p></div>'; return; }
+  products.filter(p=>p.name.toLowerCase().includes(q)).forEach(p=>{
+    list.innerHTML+=`<div class="card">
+    <img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600'">
+    <label>Name</label><input value="${p.name.replace(/"/g,'')}" onchange="upd(${p.id},'name',this.value)">
+    <label>Category</label><input value="${p.cat}" onchange="upd(${p.id},'cat',this.value)">
+    <label>Price K</label><input type="number" step="0.1" value="${p.price}" onchange="upd(${p.id},'price',parseFloat(this.value))">
+    <label>Unit</label><input value="${p.unit}" onchange="upd(${p.id},'unit',this.value)">
+    <label>📸 Change Image - Upload From Phone</label><input type="file" accept="image/*" onchange="readFile(this,'img-${p.id}','')">
+    <label>OR Image Link</label><input id="img-${p.id}" value="${p.img.startsWith('data:')?'[Uploaded Photo - tap Choose File to change]':p.img}" onchange="upd(${p.id},'img',this.value)">
+    <label>Description</label><textarea onchange="upd(${p.id},'desc',this.value)">${p.desc}</textarea>
+    <button class="btn-green" onclick="save();alert('✅ Saved!')">Save This Product</button>
+    <button class="btn-red" onclick="del(${p.id})">🗑️ Delete This Product</button>
     </div>`;
   });
 }
-function updateP(id,field,val){
-  const p = products.find(x=>x.id===id);
-  if(field==='price') p[field]=parseFloat(val); else p[field]=val;
-}
-function saveProduct(id){
-  // If Supabase connected, this will save to Supabase
-  // For now, saves to local memory + shows success
-  document.getElementById('msg').textContent = "Saved! - Connect Supabase to make it live on site";
-  console.log("SAVE TO SUPABASE:", products.find(x=>x.id===id));
-  alert("Saved in Admin. To make it live, we need to connect Supabase - send me your keys.");
-}
-function addProduct(){
-  const p = {id:Date.now(), cat:document.getElementById('n_cat').value, name:document.getElementById('n_name').value, price:parseFloat(document.getElementById('n_price').value)||0, unit:document.getElementById('n_unit').value, img:document.getElementById('n_img').value, desc:document.getElementById('n_desc').value};
-  if(!p.name) return alert("Enter name");
-  products.push(p); render(); alert("Added!");
-}
-function deleteProduct(id){
-  if(!confirm("Delete this product?")) return;
-  products = products.filter(x=>x.id!==id); render();
-}
-function saveSettings(){
-  const s = {whatsapp:document.getElementById('s_whatsapp').value, phone:document.getElementById('s_phone').value, email:document.getElementById('s_email').value};
-  console.log("SAVE SETTINGS:", s);
-  alert("Settings saved in Admin. Connect Supabase to make live.");
-}
-</script>
-</body>
-</html>
+function upd(id,k,v){ let p=products.find(x=>x.id===id); if(!p) return; p[k]=v; save(); }
+function del(id){ if(confirm('Delete this product? This cannot be undone.')){ products=products.filter(x=>x.id!==id); save(); render(); } }
+function resetAll(){ if(confirm('Reset to 6 default products?')){ products=defaults; save(); render(); } }
+</script></body></html>
