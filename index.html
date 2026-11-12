@@ -162,7 +162,7 @@ window.ZAPAI_CONFIG = {
 };
 </script>
 <script>
-const products=[
+let products=[
 {id:1,cat:"Bricks",name:"PNG Red Clay Bricks",desc:"Strong local red bricks. Perfect for houses, fences.",price:3.5,unit:"per brick",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600"},
 {id:2,cat:"Bricks",name:"Concrete Blocks 6 inch",desc:"Standard 6 inch block for foundation & walls.",price:5,unit:"per block",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600"},
 {id:3,cat:"Construction",name:"House Foundation / Slab",desc:"Labour + materials. Quote per m2. Lae & Morobe.",price:180,unit:"per m2",img:"https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600"},
@@ -185,6 +185,7 @@ function render(){
   const grid=document.getElementById('grid');
   grid.innerHTML='';
   const list = products.filter(p=>currentCat==='all'||p.cat===currentCat);
+  if(!list.length){grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#666">No products in this category yet.</p>';return;}
   list.forEach((p,i)=>{
     if(i==4){
       grid.innerHTML+=`<div class="card" style="background:#1877F2;color:white;border:0;"><div class="pad" style="text-align:center;padding:22px 16px;"><h3 style="color:white;font-size:20px;">Need a Car?</h3><p style="color:#dbeafe;">Mark X, Land Cruiser, Hilux and More - Latest stock on Facebook</p><a href="https://www.facebook.com/share/16Mzba6jNiY/" target="_blank" rel="noopener noreferrer" style="background:white;color:#1877F2;padding:12px 18px;border-radius:999px;font-weight:800;display:block;margin-top:12px;text-decoration:none;">See Cars on Facebook</a><p style="color:#bfdbfe;font-size:11px;margin-top:8px;">AD - ZAPAI</p></div></div>`;
@@ -192,10 +193,10 @@ function render(){
     if(i==10){
       grid.innerHTML+=`<div class="card" style="background:#ff6b00;color:white;border:0;"><div class="pad" style="text-align:center;padding:22px 16px;"><h3 style="color:white;font-size:20px;">Start Your Business Today!</h3><p style="color:#ffedd5;">Registration From K500 (3-5 Days) - Profile From K300 (24hr PDF)</p><a href="https://wa.me/67574697351?text=Hi ZAPAI, I want Business Registration" target="_blank" rel="noopener noreferrer" style="background:white;color:#ff6b00;padding:12px 18px;border-radius:999px;font-weight:800;display:block;margin-top:12px;text-decoration:none;">Claim Offer</a><p style="color:#ffedd5;font-size:11px;margin-top:8px;">AD - ZAPAI BUSINESS SERVICES</p></div></div>`;
     }
-    grid.innerHTML+=`<div class="card"><img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async"><div class="pad"><span class="tag">${p.cat.toUpperCase()}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price">K${p.price} <small>${p.unit}</small></div><button class="quote" onclick="selectProduct(${p.id})">Get Quotation</button><button class="order" onclick="quickOrder(${p.id})">Order on WhatsApp</button></div></div>`;
+    grid.innerHTML+=`<div class="card"><img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.src='https://via.placeholder.com/400x300?text=ZAPAI'"><div class="pad"><span class="tag">${(p.cat||'').toUpperCase()}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price">K${p.price} <small>${p.unit}</small></div><button class="quote" onclick="selectProduct(${p.id})">Get Quotation</button><button class="order" onclick="quickOrder(${p.id})">Order on WhatsApp</button></div></div>`;
   });
 }
-function filterCat(cat,btn){currentCat=cat;document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();}
+function filterCat(cat,btn){currentCat=cat;document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');render();}
 function fillSelect(){
   const s=document.getElementById('pSelect');
   s.innerHTML=products.map(p=>`<option value="${p.id}">${p.name} - K${p.price} ${p.unit}</option>`).join('');
@@ -231,7 +232,23 @@ function orderWA(){
   const msg = `Hello ZAPAI, I want to order:\n\nProduct: ${r.p.name}\nQuantity: ${r.q}\nUnit price: K${r.p.price}\nSubtotal: K${(r.p.price * r.q).toFixed(2)}\nDelivery: ${r.locText}\nDelivery charge: K${r.del.toFixed(2)}\nEstimated total: K${r.total.toFixed(2)}\n\nCustomer name / area: ${name}\n\nPlease confirm availability and final price.`;
   window.open(`https://wa.me/67576673887?text=${encodeURIComponent(msg)}`,'_blank','noopener,noreferrer');
 }
+// --- FIXED: LIVE FROM SUPABASE / ADMIN ---
+async function loadFromAdmin(){
+  try{
+    const cfg=window.ZAPAI_CONFIG;
+    const res=await fetch(cfg.SUPABASE_URL+"/rest/v1/products?select=*&active=eq.true&order=sort_order",{headers:{apikey:cfg.SUPABASE_KEY,Authorization:"Bearer "+cfg.SUPABASE_KEY}});
+    const data=await res.json();
+    if(Array.isArray(data) && data.length>0){
+      products=data.map(p=>({id:p.id,cat:p.cat||"Other",name:p.name,desc:p.description||"",price:Number(p.price),unit:p.unit||"",img:p.img||"https://via.placeholder.com/400x300?text=ZAPAI"}));
+      // Add filter button for new categories if needed
+      const cats=['all',...new Set(products.map(p=>p.cat))];
+      document.getElementById('filters').innerHTML=cats.map(c=>`<button class="${c===currentCat?'active':''}" onclick="filterCat('${c}',this)">${c==='all'?'All':c}</button>`).join('');
+      render(); fillSelect(); calc();
+    }
+  }catch(e){ console.log('Using backup products',e); }
+}
 render(); fillSelect(); calc();
+loadFromAdmin();
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.getElementById("menuToggle");
   const mainNav = document.getElementById("mainNav");
