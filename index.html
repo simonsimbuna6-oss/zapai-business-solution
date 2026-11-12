@@ -232,20 +232,26 @@ function orderWA(){
   const msg = `Hello ZAPAI, I want to order:\n\nProduct: ${r.p.name}\nQuantity: ${r.q}\nUnit price: K${r.p.price}\nSubtotal: K${(r.p.price * r.q).toFixed(2)}\nDelivery: ${r.locText}\nDelivery charge: K${r.del.toFixed(2)}\nEstimated total: K${r.total.toFixed(2)}\n\nCustomer name / area: ${name}\n\nPlease confirm availability and final price.`;
   window.open(`https://wa.me/67576673887?text=${encodeURIComponent(msg)}`,'_blank','noopener,noreferrer');
 }
-// --- FIXED: LIVE FROM SUPABASE / ADMIN ---
+// --- FIXED: LIVE FROM SUPABASE / ADMIN - NO sort_order, NO active filter ---
 async function loadFromAdmin(){
   try{
     const cfg=window.ZAPAI_CONFIG;
-    const res=await fetch(cfg.SUPABASE_URL+"/rest/v1/products?select=*&active=eq.true&order=sort_order",{headers:{apikey:cfg.SUPABASE_KEY,Authorization:"Bearer "+cfg.SUPABASE_KEY}});
+    const res=await fetch(cfg.SUPABASE_URL+"/rest/v1/products?select=*",{headers:{apikey:cfg.SUPABASE_KEY,Authorization:"Bearer "+cfg.SUPABASE_KEY}});
     const data=await res.json();
-    if(Array.isArray(data) && data.length>0){
-      products=data.map(p=>({id:p.id,cat:p.cat||"Other",name:p.name,desc:p.description||"",price:Number(p.price),unit:p.unit||"",img:p.img||"https://via.placeholder.com/400x300?text=ZAPAI"}));
-      // Add filter button for new categories if needed
-      const cats=['all',...new Set(products.map(p=>p.cat))];
-      document.getElementById('filters').innerHTML=cats.map(c=>`<button class="${c===currentCat?'active':''}" onclick="filterCat('${c}',this)">${c==='all'?'All':c}</button>`).join('');
-      render(); fillSelect(); calc();
-    }
-  }catch(e){ console.log('Using backup products',e); }
+    if(!Array.isArray(data) || data.length===0) return;
+    products=data.map(p=>({
+      id:p.id,
+      cat:p.cat||p.category||"Other",
+      name:p.name||p.title||"No name",
+      desc:p.description||p.desc||"",
+      price:Number(p.price||0),
+      unit:p.unit||"",
+      img:p.img||p.image||p.image_url||p.photo||"https://via.placeholder.com/400x300?text=ZAPAI"
+    }));
+    const cats=['all',...new Set(products.map(p=>p.cat))];
+    document.getElementById('filters').innerHTML=cats.map(c=>`<button class="${c===currentCat?'active':''}" onclick="filterCat('${c}',this)">${c==='all'?'All':c}</button>`).join('');
+    render(); fillSelect(); calc();
+  }catch(e){ console.log('Shop fallback',e); }
 }
 render(); fillSelect(); calc();
 loadFromAdmin();
