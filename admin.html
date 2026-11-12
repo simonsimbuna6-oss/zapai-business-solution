@@ -1,61 +1,168 @@
+
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ZAPAI Admin V3</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZAPAI Admin V3 - Fixed</title>
+
 <style>
-*{box-sizing:border-box}body{font-family:system-ui;background:#eef2f7;margin:0;padding:12px;color:#0f2040}
-.card{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-h1{font-size:20px;text-align:center}h3{margin:0 0 8px}input,select,textarea{width:100%;padding:10px;margin:4px 0 10px;border:1px solid #ddd;border-radius:8px;font-size:15px}
-label{font-size:12px;font-weight:700}button{width:100%;padding:12px;border:0;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;margin-top:4px}
-.btn-green{background:#00b894;color:#fff}.btn-navy{background:#0f2040;color:#fff}.btn-red{background:#ffecec;color:#c00}.btn-grey{background:#eee;color:#333}
-img{width:100%;height:160px;object-fit:cover;border-radius:8px;background:#eee}
-#login{max-width:400px;margin:60px auto;text-align:center}.hidden{display:none}
-.top{display:flex;justify-content:space-between;align-items:center}
+*{box-sizing:border-box}
+body{
+font-family:system-ui,sans-serif;
+background:#eef2f7;
+margin:0;padding:12px;color:#0f2040
+}
+.card{
+background:#fff;border-radius:12px;
+padding:14px;margin-bottom:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.08)
+}
+h1{font-size:20px;text-align:center}
+h3{margin:0 0 8px}
+input,select,textarea{
+width:100%;padding:10px;margin:4px 0 10px;
+border:1px solid #ddd;border-radius:8px;
+font-size:15px
+}
+label{font-size:12px;font-weight:700}
+button{
+width:100%;padding:12px;border:0;
+border-radius:8px;font-weight:700;
+font-size:15px;cursor:pointer;margin-top:4px
+}
+.btn-green{background:#00b894;color:white}
+.btn-navy{background:#0f2040;color:white}
+.btn-red{background:#ffecec;color:#c00}
+.btn-grey{background:#eee;color:#333}
+img{
+width:100%;height:160px;object-fit:cover;
+border-radius:8px;background:#eee
+}
+#login{max-width:400px;margin:60px auto;text-align:center}
+.hidden{display:none!important}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .badge{background:#e6f7ff;padding:6px 10px;border-radius:20px;font-size:12px}
 .preview{border:2px dashed #00b894}
 .small{font-size:12px;color:#666;text-align:center}
-</style></head>
+.message{font-size:13px;color:green}
+.product-image{margin-bottom:10px}
+</style>
+</head>
+
 <body>
+
 <div id="login" class="card">
-<h1>ZAPAI ADMIN</h1><p>Private - Developer Only</p>
-<label>Admin PIN</label><input id="pin" type="password" inputmode="numeric" placeholder="Enter 6-digit PIN">
+<h1>ZAPAI ADMIN</h1>
+<p>Private - Developer Only</p>
+<label>Admin PIN</label>
+<input id="pin" type="password" inputmode="numeric"
+placeholder="Enter 6-digit PIN">
 <button class="btn-navy" onclick="login()">Login</button>
 </div>
 
 <div id="app" class="hidden">
-<div class="top"><h1>ZAPAI Admin ⚙️</h1><span class="badge" id="count"></span></div>
-<p class="small">PIN: 759578 • Images save on this phone • Tap Save after edit</p>
 
-<div class="card"><h3>Business Settings</h3>
-<label>WhatsApp Number (without +)</label><input id="wa" value="67576673887">
-<label>Phone Display</label><input id="phone" value="+675 7667 3887">
-<label>Email</label><input id="email" value="info@zapaiinvestment.com">
-<button class="btn-green" onclick="saveSettings()">Save Settings ✅</button><p id="msg1" style="font-size:13px;color:green"></p>
+<div class="top">
+<h1>ZAPAI Admin ⚙️</h1>
+<span class="badge" id="count">0 products</span>
 </div>
 
-<div class="card"><h3>➕ Add New Product</h3>
-<label>Name *</label><input id="nName" placeholder="e.g. River Sand">
-<label>Category</label><select id="nCat"><option>Bricks</option><option>Blocks</option><option>Sand & Gravel</option><option>Cement</option><option>Timber</option><option>Roofing</option><option>Other</option></select>
-<label>Price (K) *</label><input id="nPrice" type="number" step="0.1" placeholder="3.5">
-<label>Unit</label><input id="nUnit" placeholder="per brick / per bag / per m3">
+<p class="small">V3 Fixed | Images saved on this browser</p>
+
+<div class="card">
+<h3>Business Settings</h3>
+
+<label>WhatsApp Number (without +)</label>
+<input id="wa" value="67576673887">
+
+<label>Phone Display</label>
+<input id="phone" value="+675 7667 3887">
+
+<label>Email</label>
+<input id="email" value="info@zapaiinvestment.com">
+
+<button class="btn-green" onclick="saveSettings()">
+Save Settings ✅
+</button>
+<p id="msg1" class="message"></p>
+</div>
+
+<div class="card">
+<h3>➕ Add New Product</h3>
+
+<label>Name *</label>
+<input id="nName" placeholder="e.g. River Sand">
+
+<label>Category</label>
+<select id="nCat">
+<option>Bricks</option>
+<option>Blocks</option>
+<option>Sand & Gravel</option>
+<option>Cement</option>
+<option>Timber</option>
+<option>Roofing</option>
+<option>Other</option>
+</select>
+
+<label>Price (K) *</label>
+<input id="nPrice" type="number" min="0" step="0.1" placeholder="3.5">
+
+<label>Unit</label>
+<input id="nUnit" placeholder="per brick / per bag / per m3">
+
 <label>📸 Upload Image From Phone</label>
-<input type="file" id="nFile" accept="image/*" onchange="readFile(this,'nImg','nPreview')">
-<img id="nPreview" class="preview" style="display:none">
-<label>OR Paste Image Link</label><input id="nImg" placeholder="https://...">
-<label>Description</label><textarea id="nDesc" placeholder="Strong..."></textarea>
-<button class="btn-navy" onclick="addProduct()">Add Product ✅</button>
+<input type="file" id="nFile" accept="image/*"
+onchange="readFile(this,'nImg','nPreview')">
+
+<img id="nPreview" class="preview hidden">
+
+<label>OR Paste Image Link</label>
+<input id="nImg" placeholder="https://...">
+
+<label>Description</label>
+<textarea id="nDesc" placeholder="Product description"></textarea>
+
+<button class="btn-navy" onclick="addProduct()">
+Add Product ✅
+</button>
 </div>
 
-<div class="card"><h3>🔍 Search</h3><input id="search" oninput="render()" placeholder="Search products..."></div>
+<div class="card">
+<h3>🔍 Search Products</h3>
+<input id="search" oninput="render()"
+placeholder="Search name or category...">
+</div>
+
 <div id="list"></div>
-<button class="btn-grey" onclick="resetAll()">Reset to Default Products</button>
-<button class="btn-red" onclick="if(confirm('Delete ALL products?')){products=[];save();render();}">Delete ALL Products</button>
-<p class="small">V3 - Upload works offline • Images stored in phone</p>
+
+<button class="btn-grey" onclick="resetAll()">
+Reset to Default Products
+</button>
+
+<button class="btn-red" onclick="deleteAll()">
+Delete ALL Products
+</button>
+
+<button class="btn-navy" onclick="logout()">
+Logout
+</button>
+
+<p class="small">ZAPAI Admin V3 Fixed</p>
+
 </div>
 
 <script>
-const PIN="759578";
-function login(){ if(document.getElementById('pin').value===PIN){ document.getElementById('login').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); load(); } else alert('Wrong PIN'); }
-let defaults=[
+"use strict";
+
+const PIN = "759578";
+const PRODUCT_KEY = "zapai_products_v2";
+const SETTINGS_KEY = "zapai_settings";
+
+const FALLBACK_IMAGE =
+"https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600";
+
+const defaults = [
 {id:1,name:"PNG Red Clay Bricks",cat:"Bricks",price:3.5,unit:"per brick",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600",desc:"Strong local red bricks."},
 {id:2,name:"Concrete Blocks 6 inch",cat:"Blocks",price:5,unit:"per block",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600",desc:"Standard 6 inch block."},
 {id:3,name:"River Sand - 1 Cubic Metre",cat:"Sand & Gravel",price:180,unit:"per m3",img:"https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600",desc:"Clean river sand."},
@@ -63,45 +170,348 @@ let defaults=[
 {id:5,name:"Cement 40kg Bag",cat:"Cement",price:65,unit:"per bag",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600",desc:"Portland cement 40kg."},
 {id:6,name:"Timber 2x4 - 3m",cat:"Timber",price:45,unit:"per length",img:"https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=600",desc:"Treated pine timber."}
 ];
-let products=JSON.parse(localStorage.getItem('zapai_products_v2')||'null')||defaults;
-let settings=JSON.parse(localStorage.getItem('zapai_settings')||'null')||{wa:"67576673887",phone:"+675 7667 3887",email:"info@zapaiinvestment.com"};
-function save(){ try{ localStorage.setItem('zapai_products_v2',JSON.stringify(products)); localStorage.setItem('zapai_settings',JSON.stringify(settings)); }catch(e){ alert('Image too big! Use smaller photo or link. Try take photo with lower quality.'); } }
-function load(){ document.getElementById('wa').value=settings.wa; document.getElementById('phone').value=settings.phone; document.getElementById('email').value=settings.email; render(); }
-function saveSettings(){ settings={wa:document.getElementById('wa').value,phone:document.getElementById('phone').value,email:document.getElementById('email').value}; save(); document.getElementById('msg1').textContent='✅ Saved!'; }
-function readFile(input, targetId, previewId){
-  let file=input.files[0]; if(!file) return;
-  let r=new FileReader();
-  r.onload=function(e){ document.getElementById(targetId).value=e.target.result; if(previewId){ let p=document.getElementById(previewId); p.src=e.target.result; p.style.display='block'; } };
-  r.readAsDataURL(file);
+
+function readStorage(key, fallback) {
+try {
+const value = localStorage.getItem(key);
+return value ? JSON.parse(value) : fallback;
+} catch(e) {
+return fallback;
 }
-function addProduct(){
-  let name=document.getElementById('nName').value.trim();
-  if(!name) return alert('Enter product name');
-  let p={id:Date.now(),name:name,cat:document.getElementById('nCat').value,price:parseFloat(document.getElementById('nPrice').value)||0,unit:document.getElementById('nUnit').value,img:document.getElementById('nImg').value||'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600',desc:document.getElementById('nDesc').value};
-  products.unshift(p); save(); render();
-  document.getElementById('nName').value=''; document.getElementById('nPrice').value=''; document.getElementById('nImg').value=''; document.getElementById('nDesc').value=''; document.getElementById('nPreview').style.display='none';
-  alert('✅ Product Added!');
 }
-function render(){
-  let q=(document.getElementById('search').value||'').toLowerCase();
-  let list=document.getElementById('list'); document.getElementById('count').textContent=products.length+' products'; list.innerHTML='';
-  if(products.length===0){ list.innerHTML='<div class="card"><p>No products. Add one above.</p></div>'; return; }
-  products.filter(p=>p.name.toLowerCase().includes(q)).forEach(p=>{
-    list.innerHTML+=`<div class="card">
-    <img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600'">
-    <label>Name</label><input value="${p.name.replace(/"/g,'')}" onchange="upd(${p.id},'name',this.value)">
-    <label>Category</label><input value="${p.cat}" onchange="upd(${p.id},'cat',this.value)">
-    <label>Price K</label><input type="number" step="0.1" value="${p.price}" onchange="upd(${p.id},'price',parseFloat(this.value))">
-    <label>Unit</label><input value="${p.unit}" onchange="upd(${p.id},'unit',this.value)">
-    <label>📸 Change Image - Upload From Phone</label><input type="file" accept="image/*" onchange="readFile(this,'img-${p.id}','')">
-    <label>OR Image Link</label><input id="img-${p.id}" value="${p.img.startsWith('data:')?'[Uploaded Photo - tap Choose File to change]':p.img}" onchange="upd(${p.id},'img',this.value)">
-    <label>Description</label><textarea onchange="upd(${p.id},'desc',this.value)">${p.desc}</textarea>
-    <button class="btn-green" onclick="save();alert('✅ Saved!')">Save This Product</button>
-    <button class="btn-red" onclick="del(${p.id})">🗑️ Delete This Product</button>
-    </div>`;
-  });
+
+let products = readStorage(PRODUCT_KEY, null) || 
+JSON.parse(JSON.stringify(defaults));
+
+let settings = readStorage(SETTINGS_KEY, {
+wa:"67576673887",
+phone:"+675 7667 3887",
+email:"info@zapaiinvestment.com"
+});
+
+function login() {
+if(document.getElementById("pin").value === PIN) {
+document.getElementById("login").classList.add("hidden");
+document.getElementById("app").classList.remove("hidden");
+document.getElementById("pin").value = "";
+load();
+} else {
+alert("Incorrect PIN");
 }
-function upd(id,k,v){ let p=products.find(x=>x.id===id); if(!p) return; p[k]=v; save(); }
-function del(id){ if(confirm('Delete this product? This cannot be undone.')){ products=products.filter(x=>x.id!==id); save(); render(); } }
-function resetAll(){ if(confirm('Reset to 6 default products?')){ products=defaults; save(); render(); } }
-</script></body></html>
+}
+
+function logout() {
+document.getElementById("app").classList.add("hidden");
+document.getElementById("login").classList.remove("hidden");
+}
+
+function save() {
+try {
+localStorage.setItem(PRODUCT_KEY, JSON.stringify(products));
+localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+return true;
+} catch(e) {
+alert("Storage is full. Please use smaller images or image links.");
+return false;
+}
+}
+
+function load() {
+document.getElementById("wa").value = settings.wa || "";
+document.getElementById("phone").value = settings.phone || "";
+document.getElementById("email").value = settings.email || "";
+render();
+}
+
+function saveSettings() {
+const old = settings;
+
+settings = {
+wa:document.getElementById("wa").value.trim(),
+phone:document.getElementById("phone").value.trim(),
+email:document.getElementById("email").value.trim()
+};
+
+if(save()) {
+document.getElementById("msg1").textContent = "✅ Settings saved!";
+} else {
+settings = old;
+}
+}
+
+function readFile(input, targetId, previewId) {
+const file = input.files[0];
+if(!file) return;
+
+if(!file.type.startsWith("image/")) {
+alert("Please select an image.");
+input.value = "";
+return;
+}
+
+if(file.size > 1200000) {
+alert("Image is too large. Choose a photo under 1.2MB.");
+input.value = "";
+return;
+}
+
+const reader = new FileReader();
+
+reader.onload = function(e) {
+const target = document.getElementById(targetId);
+target.value = e.target.result;
+
+if(previewId) {
+const preview = document.getElementById(previewId);
+preview.src = e.target.result;
+preview.classList.remove("hidden");
+}
+
+if(target.dataset.productId) {
+upd(Number(target.dataset.productId), "img", e.target.result);
+render();
+}
+};
+
+reader.onerror = function() {
+alert("Unable to read image.");
+};
+
+reader.readAsDataURL(file);
+}
+
+function addProduct() {
+const name = document.getElementById("nName").value.trim();
+const priceValue = document.getElementById("nPrice").value;
+const price = Number(priceValue);
+
+if(!name) return alert("Enter product name.");
+if(priceValue === "" || !Number.isFinite(price) || price < 0)
+return alert("Enter a valid product price.");
+
+const product = {
+id:Date.now(),
+name:name,
+cat:document.getElementById("nCat").value,
+price:price,
+unit:document.getElementById("nUnit").value.trim(),
+img:document.getElementById("nImg").value.trim() || FALLBACK_IMAGE,
+desc:document.getElementById("nDesc").value.trim()
+};
+
+products.unshift(product);
+
+if(!save()) {
+products.shift();
+return;
+}
+
+document.getElementById("nName").value = "";
+document.getElementById("nPrice").value = "";
+document.getElementById("nUnit").value = "";
+document.getElementById("nImg").value = "";
+document.getElementById("nDesc").value = "";
+document.getElementById("nFile").value = "";
+document.getElementById("nPreview").classList.add("hidden");
+
+render();
+alert("✅ Product added!");
+}
+
+function upd(id, key, value) {
+const product = products.find(p => p.id === id);
+if(!product) return;
+
+const oldValue = product[key];
+product[key] = value;
+
+if(!save()) {
+product[key] = oldValue;
+return;
+}
+
+}
+
+function del(id) {
+if(!confirm("Delete this product?")) return;
+
+const oldProducts = products;
+products = products.filter(p => p.id !== id);
+
+if(save()) render();
+else products = oldProducts;
+}
+
+function resetAll() {
+if(!confirm("Reset to 6 default products?")) return;
+
+const oldProducts = products;
+products = JSON.parse(JSON.stringify(defaults));
+
+if(save()) render();
+else products = oldProducts;
+}
+
+function deleteAll() {
+if(!confirm("Delete ALL products? This cannot be undone.")) return;
+
+const oldProducts = products;
+products = [];
+
+if(save()) render();
+else products = oldProducts;
+}
+
+function escapeHTML(value) {
+return String(value ?? "").replace(/[&<>"']/g, char => ({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+})[char]);
+}
+
+function safeImage(url) {
+const value = String(url || "");
+if(value.startsWith("data:image/")) return value;
+
+try {
+const parsed = new URL(value);
+if(parsed.protocol === "https:" || parsed.protocol === "http:")
+return value;
+} catch(e) {}
+
+return FALLBACK_IMAGE;
+}
+
+function render() {
+const query = (document.getElementById("search").value || "")
+.toLowerCase();
+
+const list = document.getElementById("list");
+document.getElementById("count").textContent =
+products.length + " products";
+
+list.replaceChildren();
+
+const filtered = products.filter(p =>
+String(p.name).toLowerCase().includes(query) ||
+String(p.cat).toLowerCase().includes(query)
+);
+
+if(filtered.length === 0) {
+const empty = document.createElement("div");
+empty.className = "card";
+empty.textContent = "No matching products found.";
+list.appendChild(empty);
+return;
+}
+
+filtered.forEach(p => {
+const card = document.createElement("div");
+card.className = "card";
+
+const image = document.createElement("img");
+image.className = "product-image";
+image.src = safeImage(p.img);
+image.alt = p.name || "Product image";
+image.onerror = () => { image.src = FALLBACK_IMAGE; };
+
+card.appendChild(image);
+
+const fields = [
+["Name","name","text"],
+["Category","cat","text"],
+["Price K","price","number"],
+["Unit","unit","text"]
+];
+
+fields.forEach(([label,key,type]) => {
+const lab = document.createElement("label");
+lab.textContent = label;
+card.appendChild(lab);
+
+const input = document.createElement("input");
+input.type = type;
+input.value = p[key] ?? "";
+if(type === "number") input.step = "0.1";
+
+input.addEventListener("change", () => {
+if(key === "price") {
+const value = Number(input.value);
+if(input.value === "" || !Number.isFinite(value) || value < 0) {
+alert("Enter a valid price.");
+input.value = p.price;
+return;
+}
+upd(p.id,key,value);
+} else {
+upd(p.id,key,input.value);
+}
+});
+
+card.appendChild(input);
+});
+
+const imageLabel = document.createElement("label");
+imageLabel.textContent = "📸 Change Image - Upload From Phone";
+card.appendChild(imageLabel);
+
+const file = document.createElement("input");
+file.type = "file";
+file.accept = "image/*";
+
+const imageInput = document.createElement("input");
+imageInput.type = "text";
+imageInput.placeholder = "Paste image URL";
+imageInput.value = p.img.startsWith("data:image/") ? "" : p.img;
+imageInput.dataset.productId = p.id;
+
+file.addEventListener("change", () => {
+readFile(file, imageInput.id, "");
+});
+
+imageInput.id = "image-" + p.id;
+imageInput.addEventListener("change", () => {
+upd(p.id,"img",imageInput.value.trim() || FALLBACK_IMAGE);
+render();
+});
+
+card.appendChild(file);
+card.appendChild(imageInput);
+
+const descLabel = document.createElement("label");
+descLabel.textContent = "Description";
+card.appendChild(descLabel);
+
+const textarea = document.createElement("textarea");
+textarea.value = p.desc || "";
+textarea.addEventListener("change", () => upd(p.id,"desc",textarea.value));
+card.appendChild(textarea);
+
+const saveButton = document.createElement("button");
+saveButton.className = "btn-green";
+saveButton.textContent = "Save This Product";
+saveButton.onclick = () => {
+if(save()) alert("✅ Product saved!");
+};
+card.appendChild(saveButton);
+
+const deleteButton = document.createElement("button");
+deleteButton.className = "btn-red";
+deleteButton.textContent = "🗑️ Delete This Product";
+deleteButton.onclick = () => del(p.id);
+card.appendChild(deleteButton);
+
+list.appendChild(card);
+});
+}
+
+document.getElementById("pin").addEventListener("keydown", e => {
+if(e.key === "Enter") login();
+});
+</script>
+
+</body>
+</html>
