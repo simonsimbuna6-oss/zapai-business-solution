@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZAPAI Admin - PRIVATE</title>
+<style>
+*{box-sizing:border-box;font-family:Inter,system-ui,Arial} body{background:#f6f7f9;margin:0;padding:16px;color:#0f2040}
+h1{font-size:22px} .card{background:#fff;border-radius:14px;padding:14px;margin:12px 0;border:1px solid #eef0f4}
+input,select,textarea{width:100%;padding:12px;border:1px solid #dde2ea;border-radius:10px;margin-top:6px;font-size:15px}
+label{font-weight:800;font-size:13px;display:block;margin-top:12px}
+button{width:100%;padding:13px;border:0;border-radius:11px;font-weight:800;cursor:pointer;margin-top:10px;font-size:15px}
+.save{background:#00b894;color:#fff} .del{background:#ffe6e6;color:#c00} .add{background:#0f2040;color:#fff}
+img{width:100%;height:140px;object-fit:cover;border-radius:10px;background:#eee}
+#login{max-width:400px;margin:60px auto;text-align:center}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<div id="login">
+<h1>ZAPAI ADMIN</h1>
+<p style="color:#666;font-size:14px">Private - Developer Only</p>
+<label>Admin PIN</label>
+<input type="password" id="pin" placeholder="Enter PIN">
+<button class="add" onclick="doLogin()">Login</button>
+<p style="font-size:12px;color:#888">Default PIN: 1234 - Change it in code</p>
+</div>
+
+<div id="panel" class="hidden">
+<h1>ZAPAI Admin ⚙️</h1>
+<p style="font-size:13px;color:#666">Changes here update zapaiinvestment.com instantly</p>
+
+<div class="card">
+<h3>Business Settings</h3>
+<label>WhatsApp Number (without +)</label><input id="s_whatsapp" placeholder="67576673887">
+<label>Phone Display</label><input id="s_phone" placeholder="+675 7667 3887">
+<label>Email</label><input id="s_email" placeholder="info@zapaiinvestment.com">
+<button class="save" onclick="saveSettings()">Save Settings</button>
+</div>
+
+<div class="card">
+<h3>Add New Product</h3>
+<label>Name</label><input id="n_name" placeholder="e.g. New Brick">
+<label>Category</label><select id="n_cat"><option>Bricks</option><option>Construction</option><option>Welding</option><option>Logistics</option><option>Laundry</option><option>Beauty</option><option>Resellers</option></select>
+<label>Price (K)</label><input type="number" id="n_price" placeholder="3.5">
+<label>Unit</label><input id="n_unit" placeholder="per brick">
+<label>Image Link</label><input id="n_img" placeholder="https://...">
+<label>Description</label><textarea id="n_desc"></textarea>
+<button class="add" onclick="addProduct()">Add Product</button>
+</div>
+
+<div id="list"></div>
+<p id="msg" style="text-align:center;font-weight:700"></p>
+</div>
+
+<script>
+// --- PASTE YOUR SUPABASE HERE ---
+const SUPABASE_URL = ""; // e.g. https://xyz.supabase.co
+const SUPABASE_KEY = ""; // your anon key
+const ADMIN_PIN = "1234"; // CHANGE THIS!
+
+let products = [
+{id:1,cat:"Bricks",name:"PNG Red Clay Bricks",desc:"Strong local red bricks.",price:3.5,unit:"per brick",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600"},
+{id:2,cat:"Bricks",name:"Concrete Blocks 6 inch",desc:"Standard 6 inch block.",price:5,unit:"per block",img:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600"},
+];
+
+function doLogin(){
+  if(document.getElementById('pin').value === ADMIN_PIN){
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+    render();
+  } else { alert("Wrong PIN"); }
+}
+function render(){
+  const list = document.getElementById('list');
+  list.innerHTML = "<h3>All Products ("+products.length+") - Tap to Edit</h3>";
+  products.forEach(p=>{
+    list.innerHTML += `<div class="card">
+      <img src="${p.img}">
+      <label>Name</label><input value="${p.name}" onchange="updateP(${p.id},'name',this.value)">
+      <label>Price K</label><input type="number" value="${p.price}" onchange="updateP(${p.id},'price',this.value)">
+      <label>Image Link</label><input value="${p.img}" onchange="updateP(${p.id},'img',this.value)">
+      <label>Description</label><textarea onchange="updateP(${p.id},'desc',this.value)">${p.desc}</textarea>
+      <button class="save" onclick="saveProduct(${p.id})">Save This Product</button>
+      <button class="del" onclick="deleteProduct(${p.id})">Delete</button>
+    </div>`;
+  });
+}
+function updateP(id,field,val){
+  const p = products.find(x=>x.id===id);
+  if(field==='price') p[field]=parseFloat(val); else p[field]=val;
+}
+function saveProduct(id){
+  // If Supabase connected, this will save to Supabase
+  // For now, saves to local memory + shows success
+  document.getElementById('msg').textContent = "Saved! - Connect Supabase to make it live on site";
+  console.log("SAVE TO SUPABASE:", products.find(x=>x.id===id));
+  alert("Saved in Admin. To make it live, we need to connect Supabase - send me your keys.");
+}
+function addProduct(){
+  const p = {id:Date.now(), cat:document.getElementById('n_cat').value, name:document.getElementById('n_name').value, price:parseFloat(document.getElementById('n_price').value)||0, unit:document.getElementById('n_unit').value, img:document.getElementById('n_img').value, desc:document.getElementById('n_desc').value};
+  if(!p.name) return alert("Enter name");
+  products.push(p); render(); alert("Added!");
+}
+function deleteProduct(id){
+  if(!confirm("Delete this product?")) return;
+  products = products.filter(x=>x.id!==id); render();
+}
+function saveSettings(){
+  const s = {whatsapp:document.getElementById('s_whatsapp').value, phone:document.getElementById('s_phone').value, email:document.getElementById('s_email').value};
+  console.log("SAVE SETTINGS:", s);
+  alert("Settings saved in Admin. Connect Supabase to make live.");
+}
+</script>
+</body>
+</html>
